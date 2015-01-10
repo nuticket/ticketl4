@@ -1,0 +1,14 @@
+---
+- hosts: 127.0.0.1
+  gather_facts: false
+  sudo: true
+  vars:
+    enviroment: local
+
+  tasks:
+
+  - include: tasks.yml
+
+  handlers:
+
+  - include: handlers.yml
