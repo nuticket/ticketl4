@@ -9,6 +9,9 @@
 
   - include: tasks.yml
 
+  - name: Set local hostname
+    hostname: name=local
+
   handlers:
 
   - include: handlers.yml

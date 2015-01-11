@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
     config.vm.network :forwarded_port, guest: 3000, host: 3000
     config.vm.network "forwarded_port", guest: 80, host: 80
 
-    config.vm.synced_folder "./", "/opt/tickets/current", id: "vagrant-ost2", :mount_options => ["dmode=777","fmode=666"]
+    config.vm.synced_folder "./", "/opt/tickets/current", id: "vagrant-ost2", :mount_options => ["dmode=777","fmode=777"]
 
     require 'rbconfig'
     is_windows = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)

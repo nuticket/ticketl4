@@ -15,4 +15,17 @@ return array(
 
 	'debug' => true,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Append environment service providers
+    |--------------------------------------------------------------------------
+    */
+
+    'providers' => append_config(array(
+
+        'Way\Generators\GeneratorsServiceProvider',
+		'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
+
+    )),
+
 );
