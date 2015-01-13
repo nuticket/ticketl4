@@ -1,0 +1,7 @@
+{
+  "name": "Tickets",
+  "dependencies": {
+	"AdminLTE": "almasaeed2010/AdminLTE",
+	"jquery-placeholder": "v2.0.8"
+  }
+}
