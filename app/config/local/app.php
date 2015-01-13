@@ -25,7 +25,7 @@ return array(
 
         'Way\Generators\GeneratorsServiceProvider',
 		'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
-
+		'Hughfletcher\LaravelTasks\TasksServiceProvider'
     )),
 
 );
