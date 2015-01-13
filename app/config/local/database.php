@@ -22,10 +22,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'homestead',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'host'      => isset($_ENV['DB_HOST']) ?: 'localhost',
+			'database'  => isset($_ENV['DB_DATABASE']) ?: 'tickets',
+			'username'  => isset($_ENV['DB_USERNAME']) ?: 'tickets',
+			'password'  => isset($_ENV['DB_PASSWORD']) ?: 'tickets',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

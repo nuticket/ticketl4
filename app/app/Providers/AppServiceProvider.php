@@ -7,15 +7,13 @@ class AppServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
-		
+		$this->app['config']->set("orchestra/memory::fluent.default.table", 'config');
+		$this->app['orchestra.memory']->setDefaultDriver('fluent.config');
 	}
 
     public function register()
     {
-        $this->app->bind('foo', function()
-        {
-            return new Foo;
-        });
+        require(app_path() . '/app/Support/helpers.php');
     }
 
 }

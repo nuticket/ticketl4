@@ -13,5 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	$memory = app('orchestra.memory')->make();
+	$memory->set('site.theme.frontend', 'default');
+	return View::make('index');
 });
