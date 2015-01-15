@@ -96,6 +96,7 @@ return array(
 	'providers' => array(
 
 		'App\Providers\AppServiceProvider',
+		'App\Providers\LdapServiceProvider',
 
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',

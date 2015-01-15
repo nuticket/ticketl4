@@ -7,7 +7,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"crhayes/validation": "0.7",
-		"orchestra/view": "2.2.3"
+		"orchestra/view": "2.2.3",
+		"adldap/adldap": "4.0.x"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "4.0.*",
