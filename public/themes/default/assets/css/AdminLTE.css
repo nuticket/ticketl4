@@ -3535,3 +3535,8 @@ fieldset[disabled] .btn-vk.active {
   color: #587ea3;
   background-color: #ffffff;
 }
+
+
+.skin-blue .navbar .dropdown-menu > li > a:hover {
+    color: #f9f9f9;
+};

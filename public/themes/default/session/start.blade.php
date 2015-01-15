@@ -5,7 +5,7 @@
         <title>AdminLTE | Log in</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
-        <link href="{{ theme('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- font Awesome -->
         <link href="{{ theme('assets/css/vendor.css') }}" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
@@ -22,35 +22,33 @@
 
         <div class="form-box" id="login-box">
             <div class="header">{{ trans('session.signin') }}</div>
-            <form action="{{ route('session.post.start') }}" method="post">
+            <form action="{{ route('session.post') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="body bg-gray">
-                    @if ($errors->any())
+                    @if (Session::get('message'))
                     <div class="form-group">
                         <div class="callout callout-danger">
-                            <p class="text-red">{{ $errors->first() }}</p>
+                            <p class="text-red">{{ Session::get('message') }}</p>
                         </div>
                     </div>
                     @endif
                     <div class="form-group">
-                        <input type="text" name="{{ $login_id }}" value="{{ Input::old($login_id) }}" class="form-control" placeholder="{{ trans('session.' . $login_id) }}"/>
+                        <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="{{ trans('session.username') }}"/>
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" placeholder="{{ trans('session.password') }}"/>
-                    </div>  
-                    @if (setting('site.access.remember_me', true))        
+                    </div>        
                     <div class="form-group">
                         <input type="checkbox" name="remember_me"/> {{ trans('session.remember_me') }}
                     </div>
-                    @endif
                 </div>
                 <div class="footer">                                                               
                     <button type="submit" class="btn bg-olive btn-block">{{ trans('session.signmein') }}</button>  
-                    @if (setting('site.access.allow_pass_reset', true))
-                    <p><a href="{{ route('password.get.email') }}">{{ trans('session.iforgot') }}</a></p>
+                    @if (config('site.allow_pw_reset', false))
+                    <p><a href="#">{{ trans('session.iforgot') }}</a></p>
                     @endif
-                    @if (setting('site.access.reg_method', 'public') == 'public')
-                    <a href="{{ route('session.get.register') }}" class="text-center">{{ trans('session.register') }}</a>
+                    @if (config('site.user_registration', false) == 'public')
+                    <a href="#" class="text-center">{{ trans('session.register') }}</a>
                     @endif
                 </div>
             </form>
