@@ -1,3 +1,4 @@
+
 {
 	"name": "laravel/laravel",
 	"description": "The Laravel Framework.",
@@ -8,12 +9,14 @@
 		"laravel/framework": "4.2.*",
 		"crhayes/validation": "0.7",
 		"orchestra/view": "2.2.3",
-		"adldap/adldap": "4.0.x"
+		"adldap/adldap": "4.0.x",
+		"lavary/laravel-menu": "1.5.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "4.0.*",
     	"way/generators": "~2.0",
-    	"xethron/migrations-generator": "1.2.2"
+    	"xethron/migrations-generator": "1.2.2",
+    	"itsgoingd/clockwork": "1.6"
 	},
 	"autoload": {
 		"classmap": [

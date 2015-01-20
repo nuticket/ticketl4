@@ -25,7 +25,8 @@ return array(
 
         'Way\Generators\GeneratorsServiceProvider',
 		'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
-		'Hughfletcher\LaravelTasks\TasksServiceProvider'
+		'Hughfletcher\LaravelTasks\TasksServiceProvider',
+		'Clockwork\Support\Laravel\ClockworkServiceProvider'
     )),
 
 );

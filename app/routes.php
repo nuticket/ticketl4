@@ -11,9 +11,23 @@
 |
 */
 
-Route::get('/', function()
-{
-	$memory = app('orchestra.memory')->make();
-	$memory->set('site.theme.frontend', 'default');
-	return View::make('index');
+Route::model('ticket', 'App\\Ticket');
+
+Route::group(array('namespace' => 'App\\Controllers'), function() {
+
+	
+	Route::get('session/start', array('as' => 'session.start', 'uses' => 'SessionController@getStart'));
+	Route::post('session/start', array('as' => 'session.post', 'uses' => 'SessionController@postStart'));
+	
+
+	Route::group(array('before' => 'auth'), function() {
+
+		Route::get('session/end', array('as' => 'session.end', 'uses' => 'SessionController@getEnd'));
+		Route::get('/', array('as' => 'dash.index', 'uses' => 'DashController@getIndex'));
+		Route::get('tickets', array('as' => 'tickets.list', 'uses' => 'TicketsController@getList'));
+		Route::get('tickets/{ticket}', array('as' => 'tickets.show', 'uses' => 'TicketsController@getShow'));
+		
+
+	});
+
 });

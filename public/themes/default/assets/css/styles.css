@@ -1,0 +1,33 @@
+.skin-blue .navbar .dropdown-menu > li > a:hover {
+    color: #f9f9f9;
+}
+.search-form input {
+    width: 300px !important;
+}
+table {
+	margin-bottom: 6px !important;
+}
+table thead th a {
+	display: block;
+	color: #333;
+}
+table thead th a:hover {
+	color: #333;
+}
+div.table_info {
+	padding-top: 8px;
+}
+
+div.table_paginate {
+	float: right;
+	margin: 0;
+}
+ul.pagination {
+	margin-top: 10px;
+}
+dl.detail.dl-horizontal dt {
+	width: 90px;
+}
+dl.detail.dl-horizontal dd {
+	margin-left: 100px;
+}

@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        require(app_path() . '/app/Support/helpers.php');
+        // require(app_path() . '/app/Support/helpers.php');
     }
 
 }

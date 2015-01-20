@@ -26,4 +26,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+	public function staff() {
+        return $this->hasOne('App\Staff', 'user_id', 'id');
+        	// ->rememberForever()
+            // ->CacheTags('staff' . Cfg::get('app.id'));
+    }
+
 }

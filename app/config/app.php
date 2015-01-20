@@ -125,6 +125,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		'Lavary\Menu\ServiceProvider',
 		'Orchestra\View\DecoratorServiceProvider',
 	    'Orchestra\View\ViewServiceProvider',
 	    'Orchestra\Memory\CommandServiceProvider',
