@@ -1,7 +1,10 @@
 <?php namespace App\Controllers;
 
 use App\Ticket;
-use App\Services\Validators\QueryValidator;
+use App\Validators\QueryValidator;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class TicketsController extends BaseController {
 
@@ -13,13 +16,14 @@ class TicketsController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getList()
+	public function index()
 	{
+
 		// $tickets = new Ticket; 
-		$query = ['sort' => 'id', 'order' => 'desc', 'status' => 'new-open'];
+		$query = ['sort' => 'id', 'order' => 'desc'];
 		$errors = null;
 
-		$queryValidator = QueryValidator::make($this->app['request']->query())
+		$queryValidator = QueryValidator::make(Request::query())
 			->addContext('tickets')
 		    ->bindReplacement('sort', ['fields' => 'id,last_action_at,subject,user,priority,staff']);
 
@@ -28,21 +32,26 @@ class TicketsController extends BaseController {
 		  	$errors = $queryValidator->errors();
 			
 		} else {
-			$query = array_merge($query, $queryValidator->getAttributes());
+			$query = array_merge($query, array_filter($queryValidator->getAttributes()));
 		}
 		
 		// staff or user?
-		if (!$this->app['auth']->user()->staff) {
-			$query['tickets.user_id'] = $this->app['auth']->user()->id;
+		if (!Auth::user()->staff) {
+			$query['tickets.user_id'] = Auth::user()->id;
 		}
 
 		$tickets = Ticket::getByQuery(array_except($query, ['_url']));
 		$query = array_except($query, ['with', '_url']);
-		return $this->app['view']->make('tickets.list', compact('query', 'errors', 'tickets'));
+		return View::make('tickets.list', compact('query', 'errors', 'tickets'));
 		
 	}
 
-	public function getShow(Ticket $ticket) {
+	public function show(Ticket $ticket) {
+		// $errors = null;
+		return View::make('tickets.show', compact('ticket'));
+	}
+
+	public function create(Ticket $ticket) {
 		$errors = null;
 		return $this->app['view']->make('tickets.show', compact('errors', 'ticket'));
 	}

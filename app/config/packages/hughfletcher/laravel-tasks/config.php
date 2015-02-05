@@ -1,18 +1,28 @@
 <?php
 
 return [
-	'copy' => [
+	'copycss' => [
 		'copy' => [
 			'src' => ['vendor/bower_components/AdminLTE/css/AdminLTE.css'],
 			'dest' => 'public/themes/default/assets/css/',
 		],
 	],
-	// 'concatjs' => [
-	// 	'concat' => [
-	// 		'src' => ['app/assets/js/tickets.js', 'app/assets/js/default.js'],
-	// 		'dest' => 'public/js/default.js'
-	// 	]
-	// ],
+	'copyjs' => [
+		'copy' => [
+			'src' => [
+				'vendor/bower_components/AdminLTE/js/AdminLTE/app.js',
+				'vendor/bower_components/AdminLTE/js/plugins/datatables/dataTables.bootstrap.js',
+				'vendor/bower_components/AdminLTE/js/plugins/datatables/jquery.dataTables.js'
+			],
+			'dest' => 'public/themes/default/assets/js/',
+		],
+	],
+	'concatjs' => [
+		'concat' => [
+			'src' => ['app/assets/js/tickets.js', 'app/assets/js/default.js'],
+			'dest' => 'public/js/default.js'
+		]
+	],
 	// 'minifyjs' => [
 	// 	'minify' => [
 	// 		'type' => 'js',

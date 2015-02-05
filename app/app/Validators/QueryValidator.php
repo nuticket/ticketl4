@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Validators;
+namespace App\Validators;
 
 use Crhayes\Validation\ContextualValidator;
 

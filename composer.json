@@ -16,7 +16,8 @@
 		"phpunit/phpunit": "4.0.*",
     	"way/generators": "~2.0",
     	"xethron/migrations-generator": "1.2.2",
-    	"itsgoingd/clockwork": "1.6"
+    	"itsgoingd/clockwork": "1.6",
+    	"codegyre/robo": "*"
 	},
 	"autoload": {
 		"classmap": [

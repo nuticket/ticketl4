@@ -31,21 +31,18 @@
 							<div class="row pad">
 								<div class="col-sm-6">
 									<div class="btn-group">
-										<a href="{{ route('tickets.list', ['status' => 'new-open']) }}" class="btn btn-default btn-flat btn-sm active">Open ({{ $open_count }})</a>
-										<a href="{{ route('tickets.list', ['status' => 'closed']) }}" class="btn btn-default btn-flat btn-sm">Closed ({{ $close_count }})</a>
+										<a href="{{ route('tickets.index', ['status' => 'new-open']) }}" class="btn btn-default btn-flat btn-sm{{ count(Request::query()) == 2 && Request::query('status') == 'new-open'? ' active' : '' }}">Open ({{ $open_count }}) </a>
+										<a href="{{ route('tickets.index', ['status' => 'closed']) }}" class="btn btn-default btn-flat btn-sm{{ count(Request::query()) == 2 && Request::query('status') == 'closed' ? ' active' : '' }}">Closed ({{ $close_count }})</a>
 										@if($is_staff)
-										<a href="{{ route('tickets.list', ['staff_id' => user('staff')->id, 'status' => 'new-open']) }}" class="btn btn-default btn-flat btn-sm">Assigned ({{ $assigned_count }})</a>
+										<a href="{{ route('tickets.index', ['staff_id' => user('staff')->id, 'status' => 'new-open']) }}" class="btn btn-default btn-flat btn-sm{{ count(Request::query()) == 3 && Request::query('status') == 'new-open' && Request::query('staff_id') == Auth::user()->staff->id ? ' active' : '' }}">Assigned ({{ $assigned_count }})</a>
 										@endif
 									</div>
 
 								</div>
 								<div class="col-sm-6 search-form">
-									<form action="{{ route('tickets.list') }}" class="text-right form-inline">
+									<form action="{{ route('tickets.index') }}" class="text-right form-inline">
 										<div class="input-group">
 											<input type="text" name="q" value="{{ isset($query['q']) ? $query['q'] : null }}" class="form-control input-sm" placeholder="Search">
-											<input type="hidden" name="status[]" value="new">
-											<input type="hidden" name="status[]" value="open">
-											<input type="hidden" name="status[]" value="closed">
 											<div class="input-group-btn">
 												<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
 											</div>
@@ -74,7 +71,7 @@
 										@if ($tickets->count() >= 1)
 										@foreach ($tickets as $ticket)
 										<tr>
-											<td>{{ link_to_route('tickets.show', $ticket['id'], [$ticket['id']]) }}</td>
+											<td>{{ link_to_route('tickets.show', $ticket['id'], [$ticket['id'], '#action']) }}</td>
 											<td>{{ datetime($ticket['last_action_at']) }}</td>
 											<td>{{ link_to_route('tickets.show', $ticket['subject'], [$ticket['id']]) }}</td>
 											<td>{{ $ticket['user'] }}</td>
@@ -123,45 +120,57 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title"><i class="fa fa-envelope-o"></i> Compose New Message</h4>
+                        <h4 class="modal-title"><i class="fa fa-search"></i> Advanced Search</h4>
                     </div>
-                    <form action="#" method="post">
+                    <form action="{{ route('tickets.index') }}" method="get" enctype="text/plain">
                         <div class="modal-body">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">TO:</span>
-                                    <input name="email_to" type="email" class="form-control" placeholder="Email TO">
-                                </div>
+                        	<div class="row">
+                        		<div class="col-md-12">
+                        		<input class="form-control" name="q" placeholder="Keywords - Optional">
+                        		</div>
+                        	</div>
+                        	<div class="row">
+                        		<div class="col-md-6">
+		                            <div class="form-group">
+		                                <label for="exampleInputEmail1" class="control-label">Status</label>
+    									<input class="status-select form-control" placeholder="Leave empty for any" name="status">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="exampleInputEmail1" class="control-label">Priority</label>
+    									<input class="priority-select form-control" placeholder="Leave empty for any" name="priority">
+		                            </div>
+	                            </div>
+	                            <div class="col-md-6">
+		                            <div class="form-group">
+		                                <label for="exampleInputEmail1" class="control-label">Assigned To</label>
+    									<input class="assigned-select form-control" name="staff_id" placeholder="Leave empty for any">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="exampleInputEmail1" class="control-label">Department</label>
+    									<input class="dept-select form-control" name="ticket_dept_id" placeholder="Leave empty for any">
+		                            </div>
+	                            </div>
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">CC:</span>
-                                    <input name="email_to" type="email" class="form-control" placeholder="Email CC">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">BCC:</span>
-                                    <input name="email_to" type="email" class="form-control" placeholder="Email BCC">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea name="message" id="email_message" class="form-control" placeholder="Message" style="height: 120px;"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <div class="btn btn-success btn-file">
-                                    <i class="fa fa-paperclip"></i> Attachment
-                                    <input type="file" name="attachment"/>
-                                </div>
-                                <p class="help-block">Max. 32MB</p>
-                            </div>
+
+                        	<div class="row">
+                        		<div class="col-md-12">
+                        		<label>Date Range [Create Date]:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="createtime" name="created_at" placeholder="Leave empty for all"/>
+                                        </div><!-- /.input group -->
+                        		</div>
+                        	</div>
 
                         </div>
                         <div class="modal-footer clearfix">
 
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
 
-                            <button type="submit" class="btn btn-primary pull-left"><i class="fa fa-envelope"></i> Send Message</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        </div>
                         </div>
                     </form>
                 </div><!-- /.modal-content -->

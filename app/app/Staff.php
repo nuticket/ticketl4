@@ -8,6 +8,8 @@ class Staff extends Eloquent {
 
 	protected $fillable = [];
 
+	protected $appends = array('display_name');
+
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
@@ -20,7 +22,12 @@ class Staff extends Eloquent {
 	}
 
 	public function user() {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\User');
+    }
+
+    public function getDisplayNameAttribute()
+    {
+        return $this->user->display_name;    
     }
 
 }

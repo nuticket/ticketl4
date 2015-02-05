@@ -3,13 +3,16 @@
 use Str;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Carbon\Carbon;
 
 class Ticket extends Eloquent {
 
 	protected $table = 'tickets';
 
 
-	 protected $fillable = ['id', 'last_action_at', 'subject', 'user_id', 'priority', 'staff_id'];
+	 protected $fillable = ['id', 'last_action_at', 'subject', 'user_id', 'priority', 'staff_id', 'status'];
+
+
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -19,6 +22,7 @@ class Ticket extends Eloquent {
 	protected $hidden = [];
 
 	public static function getByQuery($query, $user_id = null) {
+
 
 		//defaults
 		$per_page = isset($query['per_page']) ? $query['per_page'] : null;
@@ -61,19 +65,18 @@ class Ticket extends Eloquent {
 			unset($query['q']);
 		}
 
-		// dd($query);
-		// do rest
+		if (isset($query['created_at'])) {
+			$created_at = explode('-', $query['created_at']);
+			$created_at_start = Carbon::createFromFormat('m/d/Y', trim($created_at[0]))->startOfDay()->toDateTimeString();
+			$created_at_end = Carbon::createFromFormat('m/d/Y', trim($created_at[1]))->endOfDay()->toDateTimeString();
+			// dd($created_at_start . ' - '. $created_at_end);
+			$tickets = $tickets->where('tickets.created_at', '>', $created_at_start)->where('tickets.created_at', '<', $created_at_end);
+			unset($query['created_at']);
+		}
+
 		foreach ($query as $param => $value) {
 
-
-			// $array = $value;
-
-			// if (!is_array($array)) {
-			// 	$array = [$value];
-			// }
-
 			$tickets = $tickets->whereIn($param, explode('-', $value));
-			
 		}
 
 		return $tickets->paginate($per_page);
@@ -118,6 +121,10 @@ class Ticket extends Eloquent {
     public static function getAssignedCount($staff_id) {
 
     	return self::wherein('status', ['open', 'new'])->where('staff_id', $staff_id)->count();
+    }
+
+    public static function checkUserTicket($ticket_id, $user_id) {
+    	return self::where('id', $ticket_id)->where('user_id', $user_id)->count();
     }
 
 }

@@ -13,7 +13,7 @@
 
 Route::model('ticket', 'App\\Ticket');
 
-Route::group(array('namespace' => 'App\\Controllers'), function() {
+Route::group(['namespace' => 'App\\Controllers', 'before' => 'ui'], function() {
 
 	
 	Route::get('session/start', array('as' => 'session.start', 'uses' => 'SessionController@getStart'));
@@ -24,9 +24,14 @@ Route::group(array('namespace' => 'App\\Controllers'), function() {
 
 		Route::get('session/end', array('as' => 'session.end', 'uses' => 'SessionController@getEnd'));
 		Route::get('/', array('as' => 'dash.index', 'uses' => 'DashController@getIndex'));
-		Route::get('tickets', array('as' => 'tickets.list', 'uses' => 'TicketsController@getList'));
-		Route::get('tickets/{ticket}', array('as' => 'tickets.show', 'uses' => 'TicketsController@getShow'));
+		Route::get('tickets', array('as' => 'tickets.index', 'uses' => 'TicketsController@index'));
+		Route::get('tickets/create', array('as' => 'tickets.create', 'uses' => 'TicketsController@create'));
+		Route::get('tickets/{ticket}', array('as' => 'tickets.show', 'uses' => 'TicketsController@show'));
 		
+		Route::post('actions/{type?}', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|assign)');
+		// Route::post('actions/comment', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
+		// Route::post('actions/transfer', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
+		// Route::post('actions/reassign', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
 
 	});
 

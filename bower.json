@@ -1,7 +1,9 @@
 {
   "name": "Tickets",
   "dependencies": {
-	"AdminLTE": "almasaeed2010/AdminLTE",
-	"jquery-placeholder": "v2.0.8"
+    "AdminLTE": "almasaeed2010/AdminLTE",
+    "jquery-placeholder": "v2.0.8",
+    "select2": "3.5.2",
+    "bootstrap-daterangepicker": "1.3.17"
   }
 }

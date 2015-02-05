@@ -1,7 +1,7 @@
 <?php namespace App\Providers; 
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\Application;
+use App\Support\AppValidator;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -9,6 +9,11 @@ class AppServiceProvider extends ServiceProvider {
 	{
 		$this->app['config']->set("orchestra/memory::fluent.default.table", 'config');
 		$this->app['orchestra.memory']->setDefaultDriver('fluent.config');
+
+		$this->app['validator']->resolver(function($translator, $data, $rules, $messages)
+		{
+		    return new AppValidator($translator, $data, $rules, $messages);
+		});
 	}
 
     public function register()

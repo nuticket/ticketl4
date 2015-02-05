@@ -31,3 +31,19 @@ dl.detail.dl-horizontal dt {
 dl.detail.dl-horizontal dd {
 	margin-left: 100px;
 }
+/*buttons*/
+.btn:active, .btn.active {
+background-image: none;
+outline: 0;
+-webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+
+/*timeline*/
+.timeline {
+	padding-bottom: 12px;
+}
+
+/*errors*/
+.red-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}
+.red-tooltip + .tooltip > .tooltip-arrow { border-bottom-color:#f00; }

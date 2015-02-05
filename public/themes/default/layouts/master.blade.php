@@ -9,19 +9,24 @@
         <!-- Ionicons -->
         <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- Morris chart -->
-        <link href="css/morris/morris.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="css/morris/morris.css" rel="stylesheet" type="text/css" /> -->
         <!-- jvectormap -->
-        <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" /> -->
         <!-- Date Picker -->
-        <link href="css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" /> -->
         <!-- Daterange picker -->
-        <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" /> -->
         <!-- bootstrap wysihtml5 - text editor -->
-        <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" /> -->
         <!-- Theme style -->
         <!-- <link href="{{ theme('assets/css/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" /> -->
         <link href="{{ theme('assets/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ theme('assets/css/select2.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ theme('assets/css/select2-bootstrap.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ theme('assets/css/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ theme('assets/css/styles.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ theme('assets/css/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" type="text/css" />
+
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,30 +96,34 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+        <!-- // <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script> -->
         <!-- Morris.js charts -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="js/plugins/morris/morris.min.js" type="text/javascript"></script>
+        <!-- // <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> -->
+        <!-- // <script src="js/plugins/morris/morris.min.js" type="text/javascript"></script> -->
         <!-- Sparkline -->
-        <script src="js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+        <!-- // <script src="js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script> -->
         <!-- jvectormap -->
-        <script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+        <!-- // <script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script> -->
+        <!-- // <script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script> -->
         <!-- jQuery Knob Chart -->
-        <script src="js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+        <!-- // <script src="js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script> -->
         <!-- daterangepicker -->
-        <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <!-- // <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script> -->
         <!-- datepicker -->
-        <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+        <!-- // <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script> -->
         <!-- Bootstrap WYSIHTML5 -->
-        <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+        <!-- // <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script> -->
         <!-- iCheck -->
-        <script src="js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        <!-- // <script src="js/plugins/iCheck/icheck.min.js" type="text/javascript"></script> -->
 
         <!-- AdminLTE App -->
-        <script src="{{ theme('assets/js/app.js') }}" type="text/javascript"></script>
+        
         <!-- // <script src="{{ theme('assets/js/jquery.dataTables.js') }}" type="text/javascript"></script> -->
-        <script src="{{ theme('assets/js/dataTables.bootstrap.js') }}" type="text/javascript"></script>
+        <script src="{{ theme('assets/js/select2.min.js') }}" type="text/javascript"></script>
+        <script src="{{ theme('assets/js/moment.js') }}" type="text/javascript"></script>
+        <script src="{{ theme('assets/js/daterangepicker.js') }}" type="text/javascript"></script>
+        <script src="{{ theme('assets/js/bootstrap3-wysihtml5.all.min.js') }}" type="text/javascript"></script>
+        <script src="{{ theme('assets/js/app.js') }}" type="text/javascript"></script>
 
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="js/AdminLTE/dashboard.js" type="text/javascript"></script>
@@ -123,16 +132,44 @@
         <script src="js/AdminLTE/demo.js" type="text/javascript"></script>
 
                 <script type="text/javascript">
-            // $(function() {
-            //     $('#example2').dataTable({
-            //         "bPaginate": true,
-            //         "bLengthChange": false,
-            //         "bFilter": false,
-            //         "bSort": true,
-            //         "bInfo": true,
-            //         "bAutoWidth": false
-            //     });
-            // });
+            $(document).ready(function() {
+              $(".default-select").select2();
+              $(".status-select").select2({
+                    multiple: true,
+                    separator: '-',
+                    data:[
+                        {id:'closed',text:'Closed'},
+                        {id:'open',text:'Open'},
+                        {id:'new',text:'New'}
+                    ]
+              });
+              $(".priority-select").select2({
+                    multiple: true,
+                    separator: '-',
+                    data:[
+                        {id:1,text:'1'},
+                        {id:2,text:'2'},
+                        {id:3,text:'3'},
+                        {id:4,text:'4'},
+                        {id:5,text:'5'}
+                    ]
+              });
+              $(".dept-select").select2({
+                    multiple: true,
+                    separator: '-',
+                    data: [@foreach($depts as $id => $name){id:{{ $id }},text:'{{ $name }}'},@endforeach ]
+              });
+                $(".assigned-select").select2({
+                    multiple: true,
+                    separator: '-',
+                    data: [@foreach(App\Staff::all() as $row){id:{{ $row->id }},text:'{{ $row->user->display_name }}'},@endforeach]
+              });
+                $('#createtime').daterangepicker();
+                // $(".textarea").wysihtml5({
+                //         "size": "sm" // options are xs, sm, lg
+                // });
+                $('#reply-date').daterangepicker({ singleDatePicker: true, timePickerIncrement: 15, format: 'MM/DD/YYYY h:mm a', timePicker: true, opens: 'right' });
+            });
         </script>
     </body>
 </html>
