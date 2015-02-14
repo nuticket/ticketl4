@@ -17,13 +17,15 @@
     	"way/generators": "~2.0",
     	"xethron/migrations-generator": "1.2.2",
     	"itsgoingd/clockwork": "1.6",
-    	"codegyre/robo": "*"
+    	"codegyre/robo": "*",
+    	"codeception/codeception": "*",
+    	"mockery/mockery": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/unit/TestCase.php"
 		],
 		"psr-4": {
 			"App\\": "app/app"
