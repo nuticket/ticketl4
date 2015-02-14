@@ -1,10 +1,10 @@
-<?php namespace App\Support;
+<?php namespace App\Services;
 
 use Illuminate\Validation\Validator;
 use App\Ticket;
 use Illuminate\Support\Facades\Auth;
 
-class AppValidator extends Validator {
+class ValidationRules extends Validator {
 
     public function validateCanReply($attribute, $value, $parameters)
     {

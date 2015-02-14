@@ -11,8 +11,6 @@
 |
 */
 
-Route::model('ticket', 'App\\Ticket');
-
 Route::group(['namespace' => 'App\\Controllers', 'before' => 'ui'], function() {
 
 	

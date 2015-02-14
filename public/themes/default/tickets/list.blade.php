@@ -42,7 +42,7 @@
 								<div class="col-sm-6 search-form">
 									<form action="{{ route('tickets.index') }}" class="text-right form-inline">
 										<div class="input-group">
-											<input type="text" name="q" value="{{ isset($query['q']) ? $query['q'] : null }}" class="form-control input-sm" placeholder="Search">
+											<input type="text" name="q" value="{{ Input::get('q') }}" class="form-control input-sm" placeholder="Search">
 											<div class="input-group-btn">
 												<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
 											</div>
@@ -104,7 +104,7 @@
 									</div>
 									<div class="col-xs-8">
 										<div class="table_paginate paging_bootstrap">
-											{{ $tickets->appends($query)->links() }}
+											{{ $tickets->appends(Request::query())->links() }}
 										</div>
 									</div>
 								</div>

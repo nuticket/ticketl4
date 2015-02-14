@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 
+use App, View, Redirect;
 
 class DashController extends BaseController {
 
@@ -11,13 +12,14 @@ class DashController extends BaseController {
 	 */
 	public function getIndex()
 	{
-		$memory = app('orchestra.memory')->make();
+		return Redirect::route('tickets.index');
+		$memory = App::make('orchestra.memory')->make();
 		$memory->set('site.allow_pw_reset', false);
 		$memory->forget('site.client_registration');
 		$memory->set('site.user_registration', false);
 		$memory->set('site.date_time_format', 'm/d/Y g:i a');
 		// dd(\Auth::user());
-		return $this->app['view']->make('tickets.dash');
+		return View::make('tickets.dash');
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php namespace App\Providers; 
 
 use Illuminate\Support\ServiceProvider;
-use App\Support\AppValidator;
+use App\Services\ValidationRules;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		$this->app['validator']->resolver(function($translator, $data, $rules, $messages)
 		{
-		    return new AppValidator($translator, $data, $rules, $messages);
+		    return new ValidationRules($translator, $data, $rules, $messages);
 		});
 	}
 
