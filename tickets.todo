@@ -2,8 +2,8 @@
   [ ] Make errors colors same on ticket create.
   [x] Add time_spent type to actions. @done (15-02-23 19:09)
   [ ] Create ldap sync. http://forums.asp.net/t/1626324.aspx?How+to+get+Unique+ID+of+LDAP+UserName
-  [ ] Reformat show page with new title/body db schema change.
-  [ ] Test ticket create page.
+  [x] Reformat show page with new title/body db schema change. @done (15-02-23 19:53)
+  [ ] Test ticket create page. 
   [ ] Adjust sql migration scripts to add 1 sec to non-create actions
   [ ] Adjust ticket create to add 1 sec to reply/comment actions added
 

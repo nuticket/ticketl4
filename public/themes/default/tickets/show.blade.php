@@ -108,16 +108,16 @@
 					<div class="tab-pane{{ Session::get('type') == null || Session::get('type') == 'reply' ? ' active' : '' }}" id="reply">
 						{{ Form::open(['route' => ['actions.store', 'reply'], 'class' => 'form-horizontal']) }}
 						<input name="ticket_id" type="hidden" value="{{ $ticket['id'] }}">
-						<div class="form-group{{ $errors->has('reply_message') ? ' has-error' : null }}">
+						<div class="form-group{{ $errors->has('reply_body') ? ' has-error' : null }}">
 							<div class="col-md-12">
-								@if ($errors->has('reply_message') || $errors->has('reply_hrs'))
+								@if ($errors->has('reply_body') || $errors->has('reply_time'))
 								<ul class="list-unstyled">
 								@foreach ($errors->all() as $error)
 									<li class="text-red"><strong>{{ $error }}</strong></li>
 								@endforeach
 								</ul>
 								@endif
-								<textarea class="textarea form-control" name="reply_message" placeholder="Enter a response here" style="height: 100px;">{{ Input::old('reply_message') }}</textarea>
+								<textarea class="textarea form-control" name="reply_body" placeholder="Enter a response here" style="height: 100px;">{{ Input::old('reply_body') }}</textarea>
 
 							</div>
 						</div>
@@ -126,15 +126,15 @@
 								<div class="form-group">
 									<label class="col-md-4 control-label" for="textinput">Status</label>  
 									<div class="col-md-8">
-										{{ Form::select('reply_status', ['open' => 'Open', 'closed' => 'Close', 'resolved' => 'Resolve'], (Input::old('reply_status') !== null ? Input::old('status') :  $ticket['status']), ['class' => 'form-control input-sm']) }}
+										{{ Form::select('status', ['open' => 'Open', 'closed' => 'Close', 'resolved' => 'Resolve'], (Input::old('status') !== null ? Input::old('status') :  $ticket['status']), ['class' => 'form-control input-sm']) }}
 									</div>
 								</div>
 							</div>
 							<div class="col-md-4">
-								<div class="form-group{{ $errors->has('reply_hrs') ? ' has-error' : null }}">
+								<div class="form-group{{ $errors->has('reply_time') ? ' has-error' : null }}">
 									<label class="col-md-6 control-label" for="textinput">Worked Hours</label>  
 									<div class="col-md-6">
-										<input id="textinput" name="reply_hrs" type="text" value="{{ Input::old('reply_hrs') }}" class="form-control input-sm">
+										<input id="textinput" name="reply_time" type="text" value="{{ Input::old('reply_time') }}" class="form-control input-sm">
 									</div>
 								</div>
 							</div>
@@ -151,26 +151,26 @@
 					<div class="tab-pane{{ Session::get('type') == 'comment' ? ' active' : '' }}" id="comment">
 						{{ Form::open(['route' => ['actions.store', 'comment'], 'class' => 'form-horizontal']) }}
 						<input name="ticket_id" type="hidden" value="{{ $ticket['id'] }}">
-						<div class="form-group{{ $errors->has('comment_message') ? ' has-error' : null }}">
+						<div class="form-group{{ $errors->has('comment_body') ? ' has-error' : null }}">
 							<div class="col-md-12">
-								@if ($errors->has('comment_message') || $errors->has('comment_hrs'))
+								@if ($errors->has('comment_body') || $errors->has('comment_time'))
 								<ul class="list-unstyled">
 								@foreach ($errors->all() as $error)
 									<li class="text-red"><strong>{{ $error }}</strong></li>
 								@endforeach
 								</ul>
 								@endif
-								<textarea class="textarea form-control" name="comment_message" placeholder="Enter a internal comment here" style="height: 100px;">{{ Input::old('comment_message') }}</textarea>
+								<textarea class="textarea form-control" name="comment_body" placeholder="Enter a internal comment here" style="height: 100px;">{{ Input::old('comment_body') }}</textarea>
 
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-4">
 								
-								<div class="form-group{{ $errors->has('comment_hrs') ? ' has-error' : null }}">
+								<div class="form-group{{ $errors->has('comment_time') ? ' has-error' : null }}">
 									<label class="col-md-6 control-label" for="textinput">Worked Hours</label>  
 									<div class="col-md-6">
-										<input id="textinput" name="comment_hrs" type="text" value="{{ Input::old('comment_hrs') }}" class="form-control input-sm">
+										<input id="textinput" name="comment_time" type="text" value="{{ Input::old('comment_time') }}" class="form-control input-sm">
 									</div>
 								</div>
 							</div>
@@ -191,7 +191,7 @@
 						<input name="ticket_id" type="hidden" value="{{ $ticket['id'] }}">
 						<div class="form-group">
 							<div class="col-md-6">
-								@if ($errors->has('transfer_message'))
+								@if ($errors->has('transfer_body'))
 								<ul class="list-unstyled">
 								@foreach ($errors->all() as $error)
 									<li class="text-red"><strong>{{ $error }}</strong></li>
@@ -202,9 +202,9 @@
 
 							</div>
 						</div>
-						<div class="form-group{{ $errors->has('transfer_message') ? ' has-error' : null }}">
+						<div class="form-group{{ $errors->has('transfer_body') ? ' has-error' : null }}">
 							<div class="col-md-12">
-								<textarea class="textarea form-control" name="transfer_message" placeholder="Enter reasons for the transfer" style="height: 100px;">{{ Input::old('transfer_message') }}</textarea>
+								<textarea class="textarea form-control" name="transfer_body" placeholder="Enter reasons for the transfer" style="height: 100px;">{{ Input::old('transfer_body') }}</textarea>
 
 							</div>
 						</div>
@@ -220,7 +220,7 @@
 						<input name="ticket_id" type="hidden" value="{{ $ticket['id'] }}">
 						<div class="form-group">
 							<div class="col-md-6">
-								@if ($errors->has('assign_message'))
+								@if ($errors->has('assign_body'))
 								<ul class="list-unstyled">
 								@foreach ($errors->all() as $error)
 									<li class="text-red"><strong>{{ $error }}</strong></li>
@@ -231,9 +231,9 @@
 
 							</div>
 						</div>
-						<div class="form-group{{ $errors->has('assign_message') ? ' has-error' : null }}">
+						<div class="form-group{{ $errors->has('assign_body') ? ' has-error' : null }}">
 							<div class="col-md-12">
-								<textarea class="textarea form-control" name="assign_message" placeholder="Enter reasons for the assignment or instructions for assignee" style="height: 100px;">{{ Input::old('assign_message') }}</textarea>
+								<textarea class="textarea form-control" name="assign_body" placeholder="Enter reasons for the assignment or instructions for assignee" style="height: 100px;">{{ Input::old('assign_body') }}</textarea>
 
 							</div>
 						</div>

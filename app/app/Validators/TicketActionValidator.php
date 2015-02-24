@@ -11,20 +11,20 @@ class TicketActionValidator extends ContextualValidator
             'ticket_id' => ['required', 'numeric', 'exists:tickets,id']
     	],
         'reply' => [
-            'reply_message' => 'required|min:3',
-            'reply_status' => 'required|in:closed,open,resolved', 
-            'reply_hrs' => 'numeric',
+            'reply_body' => 'required|min:3',
+            'status' => 'required|in:closed,open,resolved', 
+            'reply_time' => 'numeric',
         ],
         'comment' => [ 
-            'comment_message' => 'required|min:3',
-            'comment_hrs' => 'numeric',
+            'comment_body' => 'required|min:3',
+            'comment_time' => 'numeric',
         ],
         'transfer' => [
-            'transfer_message' => 'required|min:3',
+            'transfer_body' => 'required|min:3',
             'transfer_id' => ['required', 'numeric', 'exists:ticket_depts,id']
         ],
         'assign' => [
-            'assign_message' => 'required|min:3',
+            'assign_body' => 'required|min:3',
             'assigned_id' => ['required', 'numeric', 'exists:staff,id'],
         ]
         
