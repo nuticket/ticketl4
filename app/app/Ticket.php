@@ -52,7 +52,7 @@ class Ticket extends Eloquent {
         return $this->belongsTo('App\Dept', 'dept_id', 'id');
     }
 
-	public function actions() {
+    public function actions() {
         return $this->hasMany('App\TicketAction')->orderBy('created_at', 'asc');
     }
 

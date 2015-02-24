@@ -3,8 +3,8 @@
 @section('content')
 <section class="content-header">
 	<h1>
-		Tickets
-		<small>#{{ $ticket['id'] }}</small>
+		{{ $ticket['actions'][0]['title'] }}
+		<!-- <small>#{{ $ticket['id'] }}</small> -->
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -25,7 +25,7 @@
 				</li>
 				<!-- /.timeline-label -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 					<i class="fa fa-desktop bg-blue"></i>
 					<div class="timeline-item">
 						<span class="time"><i class="fa fa-clock-o"></i> {{ $ticket['created_at']->format('g:i a') }}</span>
@@ -40,7 +40,7 @@
 						</div>
 
 					</div>
-				</li>
+				</li> -->
 				@foreach ($ticket['actions'] as $action)
 				@if (!isset($lastday) || !$action['created_at']->isSameDay($lastday))
 				<li class="time-label">
@@ -60,12 +60,16 @@
 							<li><i class="fa fa-clock-o"></i> {{ $action['created_at']->format('g:i a') }}</li>
 						</ul>
 						<h3 class="timeline-header{{ $action['message'] == null ? ' no-border' : '' }}">
+							@if ($action['user_id'] == '0')
+							System 
+							@else
 							<a href="#">{{ $action['user']['display_name'] }}</a> 
+							@endif
 							@if ($action['type'] == 'reply')
 							replied to ticket
 							@elseif ($action['type'] == 'comment')
 							commented on ticket
-							@elseif (in_array($action['type'], ['closed', 'resolved']))
+							@elseif (in_array($action['type'], ['close', 'resolve']))
 							{{ $action['type'] }}d the ticket
 							@elseif ($action['type'] == 'edit')
 							edited ticket
@@ -73,11 +77,13 @@
 							transfered ticket to {{ $action['transfer']['name']}}
 							@elseif ($action['type'] == 'assign')
 							assigned ticket to {{ $action['assigned']['user']['display_name']}}
+							@elseif ($action['type'] == 'create')
+							created ticket
 							@endif
 						</h3>
-						@if($action['message'] != null)
+						@if($action['body'] != null)
 						<div class="timeline-body">
-							{{ $action['message'] }}
+							{{ $action['body'] }}
 						</div>
 						@endif
 					</div>

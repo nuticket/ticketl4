@@ -1,9 +1,11 @@
 1.0.0:
   [ ] Make errors colors same on ticket create.
-  [ ] Add time_spent type to actions.
+  [x] Add time_spent type to actions. @done (15-02-23 19:09)
   [ ] Create ldap sync. http://forums.asp.net/t/1626324.aspx?How+to+get+Unique+ID+of+LDAP+UserName
   [ ] Reformat show page with new title/body db schema change.
   [ ] Test ticket create page.
+  [ ] Adjust sql migration scripts to add 1 sec to non-create actions
+  [ ] Adjust ticket create to add 1 sec to reply/comment actions added
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
