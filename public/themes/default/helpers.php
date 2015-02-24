@@ -79,13 +79,18 @@ if ( ! function_exists('order'))
 		return $default;
 	}
 }
-// if ( ! function_exists('is_staff'))
-// {
-// 	function is_staff($id == null) {
 
-// 		$id = is_null($id) ? user('id') : $id;
-		
-// 		return App\Staff::getByUserId($id);
-// 	}
-// }
+if ( ! function_exists('array_json'))
+{
+	function array_json($array) {
+
+		$json = [];
+		foreach ($array as $key => $value) {
+			$json[] = ['id' => $key, 'text' => $value];
+		}
+
+		return json_encode($json);
+	}
+}
+
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class TicketDept extends Eloquent {
+class Dept extends Eloquent {
 
 	// protected $table = 'staff';
 

@@ -1,15 +1,18 @@
 <?php namespace App\Controllers;
 
 use App\Repositories\TicketInterface;
+use App\Repositories\TicketActionInterface;
 use App\Validators\QueryValidator;
-use View, Request, Str, Auth;
+use App\Validators\TicketValidator;
+use View, Request, Str, Auth, Redirect;
 
 class TicketsController extends BaseController {
 
-	public function __construct(TicketInterface $ticket, QueryValidator $validator) {
+	public function __construct(TicketInterface $ticket, QueryValidator $queryValidator, TicketValidator $ticketValidator) {
 
 		$this->tickets = $ticket;
-		$this->validator = $validator;
+		$this->queryValidator = $queryValidator;
+		$this->ticketValidator = $ticketValidator;
 	}
 
 	/**
@@ -21,7 +24,7 @@ class TicketsController extends BaseController {
 	public function index()
 	{
 
-		$validator = $this->validator->make(Request::query())
+		$validator = $this->queryValidator->make(Request::query())
 			->addContext('tickets')
 		    ->bindReplacement('sort', ['fields' => 'id,last_action_at,subject,user,priority,staff']);
 
@@ -55,9 +58,31 @@ class TicketsController extends BaseController {
 		return View::make('tickets.show', compact('ticket'));
 	}
 
-	public function create(Ticket $ticket) {
-		$errors = null;
-		return $this->app['view']->make('tickets.show', compact('errors', 'ticket'));
+	public function create() {
+		// $errors = null;
+		return View::make('tickets.create');
+	}
+
+	public function store() {
+
+		$validator = $this->ticketValidator->make(Request::all())->addContext('create');
+
+		if ($validator->fails()) {
+
+			$type = Request::get('comment') != '' && Request::get('reply') == '' ? 'comment' : 'reply';
+
+			return Redirect::route('tickets.create')
+		  		->withErrors($validator)
+		  		->withInput(); 
+		}
+
+		$attrs = $validator->getAttributes();
+
+		$ticket = $this->tickets->createWithAction($attrs);
+
+		return Redirect::route('tickets.show', [$ticket['id']])
+			->with('message', 'Ticket #' . $ticket['id'] . ' sucessfully created.');
+
 	}
 
 }

@@ -11,10 +11,12 @@ class TicketAction extends Eloquent {
         'ticket_id',
         'user_id', 
         'type',
-        'worked_hrs',
+        'time_spent',
         'message',
         'assigned_id',
-        'transfer_id'
+        'transfer_id',
+        'title',
+        'body'
     ];
 
 	/**
@@ -30,7 +32,7 @@ class TicketAction extends Eloquent {
     }
 
 	public function transfer() {
-        return $this->belongsTo('App\TicketDept', 'transfer_id', 'id');
+        return $this->belongsTo('App\Dept', 'transfer_id', 'id');
     }
 
 	public function assigned() {

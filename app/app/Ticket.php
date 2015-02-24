@@ -3,6 +3,7 @@
 use Str;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use App\Observers\TicketObserver;
 use Carbon\Carbon;
 
 class Ticket extends Eloquent {
@@ -10,7 +11,15 @@ class Ticket extends Eloquent {
 	protected $table = 'tickets';
 
 
-	 protected $fillable = ['id', 'last_action_at', 'subject', 'user_id', 'priority', 'staff_id', 'status'];
+	 protected $fillable = [
+        'last_action_at', 
+        'user_id', 
+        'priority', 
+        'staff_id', 
+        'status', 
+        'dept_id',
+        'time_spent'
+    ];
 
 
 
@@ -21,6 +30,16 @@ class Ticket extends Eloquent {
 	 */
 	protected $hidden = [];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($ticket) {
+            $ticket->last_action_at = $ticket->created_at;
+            return $ticket;
+        });
+    }
+
 	public function user() {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
@@ -30,7 +49,7 @@ class Ticket extends Eloquent {
     }
 
 	public function dept() {
-        return $this->belongsTo('App\TicketDept', 'ticket_dept_id', 'id');
+        return $this->belongsTo('App\Dept', 'dept_id', 'id');
     }
 
 	public function actions() {

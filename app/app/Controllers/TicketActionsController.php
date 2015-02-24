@@ -26,7 +26,7 @@ class TicketActionsController extends BaseController {
 			
 		} else {
 
-			$action = $this->action->create(array_merge($actionValidator->getAttributes(), ['type' => $type]));
+			$action = $this->action->createAndUpdateTicket(array_merge($actionValidator->getAttributes(), ['type' => $type]));
 
 			return $this->app['redirect']->route('tickets.show', [$action->ticket_id, '#action-' . $action->id]);
 		}

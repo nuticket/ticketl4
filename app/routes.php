@@ -24,13 +24,14 @@ Route::group(['namespace' => 'App\\Controllers', 'before' => 'ui'], function() {
 		Route::get('/', array('as' => 'dash.index', 'uses' => 'DashController@getIndex'));
 		Route::get('tickets', array('as' => 'tickets.index', 'uses' => 'TicketsController@index'));
 		Route::get('tickets/create', array('as' => 'tickets.create', 'uses' => 'TicketsController@create'));
+		Route::post('tickets/create', array('as' => 'tickets.store', 'uses' => 'TicketsController@store'));
 		Route::get('tickets/{ticket}', array('as' => 'tickets.show', 'uses' => 'TicketsController@show'));
 		
 		Route::post('actions/{type?}', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|assign)');
 		// Route::post('actions/comment', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
 		// Route::post('actions/transfer', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
 		// Route::post('actions/reassign', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
-
+		// 
 	});
 
 });

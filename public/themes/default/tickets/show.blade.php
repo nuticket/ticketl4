@@ -54,8 +54,8 @@
 					<i class="fa fa-desktop bg-blue"></i>
 					<div class="timeline-item">
 						<ul class="list-inline time">
-							@if ($action['worked_hrs'] > 0)
-							<li><span  data-toggle="tooltip" title="{{ $action['worked_hrs'] }} hour(s) worked"><i class="fa fa-wrench"></i> {{ $action['worked_hrs'] }}</span></li>
+							@if ($action['time_spent'] > 0)
+							<li><span  data-toggle="tooltip" title="{{ $action['time_spent'] }} hour(s) worked"><i class="fa fa-wrench"></i> {{ $action['time_spent'] }}</span></li>
 							@endif
 							<li><i class="fa fa-clock-o"></i> {{ $action['created_at']->format('g:i a') }}</li>
 						</ul>
@@ -99,20 +99,6 @@
 					<li{{ Session::get('type') == 'assign' ? ' class="active"' : '' }}><a href="#assign" data-toggle="tab">Assign</a></li>
 				</ul>
 				<div class="tab-content">
-					<!-- <div class="tab-pane active" id="quick">
-
-						<div class="input-group">
-							<span class="input-group-btn">
-								<button type="button" class="btn btn-default btn-flat btn-sm active" data-toggle="tooltip" title="Internal"><i class='fa fa-comment'></i></button>
-								<button type="button" class="btn btn-default btn-flat btn-sm" data-toggle="tooltip" title="Response"><i class='fa fa-comments'></i></button>
-							</span>
-							<input class="form-control input-sm" placeholder="Type message..."/>
-							<div class="input-group-btn">
-								<button class="btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
-							</div>
-						</div>
-
-					</div> -->
 					<div class="tab-pane{{ Session::get('type') == null || Session::get('type') == 'reply' ? ' active' : '' }}" id="reply">
 						{{ Form::open(['route' => ['actions.store', 'reply'], 'class' => 'form-horizontal']) }}
 						<input name="ticket_id" type="hidden" value="{{ $ticket['id'] }}">
@@ -247,7 +233,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-										<input class="btn btn-primary btn-sm" type="submit" name="action_reply" value="Assign">
+								<input class="btn btn-primary btn-sm" type="submit" name="action_reply" value="Assign">
 							</div>
 						</div>
 						</form>
@@ -292,7 +278,7 @@
 									<dt>Assigned</dt>
 									<dd>{{ $ticket['staff']['user']['display_name'] }}</dd>
 									<dt>Total Hours</dt>
-									<dd>{{ $ticket['worked_hrs'] + $ticket['travel_hrs'] }}</dd>
+									<dd>{{ $ticket['time_spent'] }}</dd>
 									<dt>Last Action</dt>
 									<dd>{{ datetime($ticket['last_action_at']) }}</dd>
 								</dl>

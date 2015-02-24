@@ -4,6 +4,7 @@ use App\Repositories\TicketInterface;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Ticket;
 use App\TicketAction;
+use Auth;
 
 class TicketRepository extends BaseRepository implements TicketInterface {
 
@@ -12,10 +13,51 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 * 
 	 * @param App\Ticket
 	 */
-	public function __construct(Ticket $model) {
+	public function __construct(Ticket $model, TicketAction $action) {
 
 		$this->model = $model;
+		$this->action = $action;
 
+	}
+	/**
+	 * Create a ticket and/or a reply/comment action
+	 * 		
+	 * @param  string $attrs 
+	 * @return array 
+	 */
+	public function createWithAction($attrs) {
+
+		//if no comment/reply status remains new
+		$attrs['status'] = $attrs['reply'] == '' && $attrs['comment'] == '' ? 'new' : $attrs['status'];
+
+		//create ticket
+		$ticket = $this->model->create($attrs);
+
+		//create action type - create
+		$action = ['ticket_id' => $ticket->id, 'user_id' => Auth::user()->id];
+		$this->action->create(array_merge($action, ['type' => 'create']));
+
+		//set a reply/comment time spent attr
+		$action['time_spent'] = $ticket->time_spent;
+
+		//only title in create action
+		unset($action['title']);
+
+		if ($attrs['reply'] != '') {
+
+			$this->action->create(array_merge($action, ['body' => $attrs['reply'], 'type' => 'reply']));
+
+			unset($action['time_spent']);
+
+		}
+
+		if ($attrs['comment'] != '') {
+
+			$this->action->create(array_merge($action, ['body' => $attrs['reply'], 'type' => 'reply']));
+
+		}
+
+		return $ticket;
 	}
 
 	/**
@@ -35,10 +77,12 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 */
 	public function select() {
 
-		$this->model = $this->model->select('tickets.id as id', 'last_action_at', 'subject', 'users.display_name as user', 'priority', 'su.display_name as staff')
+		$this->model = $this->model->select('tickets.id as id', 'last_action_at', 'ticket_actions.title as subject', 'users.display_name as user', 'priority', 'su.display_name as staff')
 			->join('users', 'users.id', '=', 'tickets.user_id')
 			->join('staff', 'staff.id', '=', 'tickets.staff_id')
-			->join('users as su', 'su.id', '=', 'staff.user_id');		
+			->join('users as su', 'su.id', '=', 'staff.user_id')
+			->join('ticket_actions','ticket_actions.ticket_id', '=', 'tickets.id')
+			->where('ticket_actions.type', 'create');		
 
 		return $this;
 
@@ -157,7 +201,7 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 		$old_status = $ticket->status;
 
 		$ticket->last_action_at = $reply->created_at;
-		$ticket->worked_hrs += $reply->worked_hrs;
+		$ticket->time_spent += $reply->time_spent;
 		$ticket->status = $reply->_status;
 
 		if ($reply->_status == 'open') {
@@ -183,7 +227,7 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 		$ticket = $this->model->find($comment->ticket_id);
 
 		$ticket->last_action_at = $comment->created_at;
-		$ticket->worked_hrs += $comment->worked_hrs;
+		$ticket->time_spent += $comment->time_spent;
 
 		$ticket->save();
 

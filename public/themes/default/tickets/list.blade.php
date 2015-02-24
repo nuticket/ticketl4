@@ -155,12 +155,12 @@
                         	<div class="row">
                         		<div class="col-md-12">
                         		<label>Date Range [Create Date]:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-clock-o"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right" id="createtime" name="created_at" placeholder="Leave empty for all"/>
-                                        </div><!-- /.input group -->
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="createtime" name="created_at" placeholder="Leave empty for all"/>
+                                </div><!-- /.input group -->
                         		</div>
                         	</div>
 

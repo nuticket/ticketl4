@@ -20,7 +20,10 @@ class UiFilter {
 	private function loadComposers() {
 
 		$this->app['view']->composers(array(
-		    'App\\Composers\\TicketsComposer' => ['tickets.list', 'tickets.show'] 
+		    'App\\Composers\\TicketsComposer' => ['tickets.list', 'tickets.show', 'tickets.create'],
+		    'App\\Composers\\UserComposer' => ['tickets.create'],
+		    'App\\Composers\\DeptComposer' => ['tickets.list', 'tickets.show', 'tickets.create'],
+		    'App\\Composers\\StaffComposer' => ['tickets.create', 'tickets.show']
 		));
 	}
 

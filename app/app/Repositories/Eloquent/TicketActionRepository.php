@@ -14,17 +14,23 @@ class TicketActionRepository implements TicketActionInterface {
 
 	}
 
-	public function create($attr) {
+    public function create($attr) {
+
+        $attr['message'] = nl2br($attr['message']); //move to observer
+
+    }
+
+	public function createAndUpdateTicket($attr) {
 
 		$attr['message'] = nl2br($attr[$attr['type'] . '_message']);
         $attr['user_id'] = Auth::user()->id; //move to controller
-        isset($attr[$attr['type'] . '_hrs']) ? $attr['worked_hrs'] = $attr[$attr['type'] . '_hrs'] : null;
+        isset($attr[$attr['type'] . '_hrs']) ? $attr['time_spent'] = $attr[$attr['type'] . '_hrs'] : null;
 
         $action = $this->action->create($attr);
         
         $action->_status = isset($attr[$attr['type'] . '_status']) ? $attr[$attr['type'] . '_status'] : null;
 
-        //update ticket
+        //update ticket - move to this repo
         $ticket = call_user_func_array([$this->ticket, 'updateBy' . ucfirst($action->type)], [$action]);
 
         if (isset($ticket->_old_status) && $ticket->_old_status != $ticket->status) {

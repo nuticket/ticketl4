@@ -133,7 +133,7 @@
 
                 <script type="text/javascript">
             $(document).ready(function() {
-              $(".default-select").select2();
+              $("select.select2-default").select2({minimumResultsForSearch: 8});
               $(".status-select").select2({
                     multiple: true,
                     separator: '-',

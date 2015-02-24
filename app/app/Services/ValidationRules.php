@@ -19,4 +19,9 @@ class ValidationRules extends Validator {
         return false;
     }
 
+    public function validaterequiredWithOne() {
+
+
+    }
+
 }
