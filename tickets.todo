@@ -3,9 +3,19 @@
   [x] Add time_spent type to actions. @done (15-02-23 19:09)
   [ ] Create ldap sync. http://forums.asp.net/t/1626324.aspx?How+to+get+Unique+ID+of+LDAP+UserName
   [x] Reformat show page with new title/body db schema change. @done (15-02-23 19:53)
-  [ ] Test ticket create page. 
+  [ ] Refactor reply action on show.
+  [ ] Refactor comment action on show.
+  [ ] Refactor transfer action on show.
+  [ ] Refactor assign action on show.
+  [ ] Refactor reply action with ticket create.
+  [ ] Refactor comment action with ticket create.
   [ ] Adjust sql migration scripts to add 1 sec to non-create actions
   [ ] Adjust ticket create to add 1 sec to reply/comment actions added
+  [x] Test add actions on show page. @done (15-02-23 20:55)
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
+  [ ] Convert app to Laravel 5, ensure dependencies are compatible.
+  [ ] Move to AdminLTE 2.0.
+  [ ] HLC/TT package.
+  [ ] LDAP package.

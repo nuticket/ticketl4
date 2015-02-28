@@ -69,8 +69,8 @@
 							replied to ticket
 							@elseif ($action['type'] == 'comment')
 							commented on ticket
-							@elseif (in_array($action['type'], ['close', 'resolve']))
-							{{ $action['type'] }}d the ticket
+							@elseif (in_array($action['type'], ['closed', 'resolved']))
+							{{ $action['type'] }} the ticket
 							@elseif ($action['type'] == 'edit')
 							edited ticket
 							@elseif ($action['type'] == 'transfer')
@@ -79,6 +79,8 @@
 							assigned ticket to {{ $action['assigned']['user']['display_name']}}
 							@elseif ($action['type'] == 'create')
 							created ticket
+							@elseif ($action['type'] == 'open')
+							opened ticket
 							@endif
 						</h3>
 						@if($action['body'] != null)
@@ -126,7 +128,7 @@
 								<div class="form-group">
 									<label class="col-md-4 control-label" for="textinput">Status</label>  
 									<div class="col-md-8">
-										{{ Form::select('status', ['open' => 'Open', 'closed' => 'Close', 'resolved' => 'Resolve'], (Input::old('status') !== null ? Input::old('status') :  $ticket['status']), ['class' => 'form-control input-sm']) }}
+										{{ Form::select('reply_status', ['open' => 'Open', 'closed' => 'Close', 'resolved' => 'Resolve'], (Input::old('reply_status') !== null ? Input::old('reply_status') :  $ticket['reply_status']), ['class' => 'form-control input-sm']) }}
 									</div>
 								</div>
 							</div>

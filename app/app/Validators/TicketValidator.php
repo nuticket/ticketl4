@@ -16,11 +16,19 @@ class TicketValidator extends ContextualValidator
             'body' => ['required', 'min:3'],
     	],
         'create' => [
-            'time_spent' => ['numeric', 'required_with:reply,comment'],
-            'reply' => ['min:3'],
-            'comment' => 'min:3',
-            'status' => ['required_with:reply,comment', 'in:open,closed,resolved']
+            'time_spent' => ['numeric'],
+            'reply_body' => ['min:3'],
+            'comment_body' => ['min:3'],
+            'status' => ['in:open,closed,resolved']
         ]
     ];
+
+    protected function addConditionalRules($validator)
+    {
+        $validator->sometimes(['reply_body', 'comment_body'], 'required_with:time_spent,status', function($input)
+        {
+            return $input->reply == '' && $input->comment == '';
+        });
+    }
 
 }

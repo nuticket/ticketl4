@@ -12,7 +12,7 @@ class TicketActionValidator extends ContextualValidator
     	],
         'reply' => [
             'reply_body' => 'required|min:3',
-            'status' => 'required|in:closed,open,resolved', 
+            'reply_status' => 'required|in:closed,open,resolved', 
             'reply_time' => 'numeric',
         ],
         'comment' => [ 

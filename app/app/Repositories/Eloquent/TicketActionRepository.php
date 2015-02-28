@@ -14,38 +14,42 @@ class TicketActionRepository implements TicketActionInterface {
 
 	}
 
-    public function create($attr) {
+    public function create($attrs) {
 
-        $attr['message'] = nl2br($attr['message']); //move to observer
+        $attrs['body'] = nl2br($attrs[$attrs['type'] . '_body']);
+        $attrs['user_id'] = Auth::user()->id; //move to controller
 
+        return $this->action->create($attrs);
     }
 
-	public function createAndUpdateTicket($attr) {
+    /**
+     * Create Action and update ticket
+     *         
+     * @param  array $attrs ['type', 'body', 'status', 'ticket_id', 'time_spent']
+     * @return App\TicketAction
+     */
+	public function createAndUpdateTicket($attrs) {
 
-		$attr['body'] = nl2br($attr[$attr['type'] . '_body']);
-        $attr['user_id'] = Auth::user()->id; //move to controller
-        isset($attr[$attr['type'] . '_time']) ? $attr['time_spent'] = $attr[$attr['type'] . '_time'] : null;
-
-        $action = $this->action->create($attr);
+		$action = $this->create($attrs);
         
-        $action->_status = isset($attr['status']) ? $attr['status'] : null;
+        $action_array = $action->toArray();
 
-        //update ticket - move to this repo
-        $ticket = call_user_func_array([$this->ticket, 'updateBy' . ucfirst($action->type)], [$action]);
+        if (isset($attrs['status'])) { $action_array['status'] = $attrs['status']; }
 
-        if (isset($ticket->_old_status) && $ticket->_old_status != $ticket->status) {
+        //update ticket 
+        $ticket = call_user_func_array([$this->ticket, 'updateBy' . ucfirst($action->type)], [$action_array]);
 
-            $statuses = ['closed' => 'close', 'resolved' => 'resolve', 'open' => 'open'];
-    		
-    		$action->type = $statuses[$ticket->status];
+        if (isset($ticket['old_status']) && $ticket['old_status'] != $ticket['status']) {
+
+            $action->type = $ticket['status'];
 
     	}
 
-    	unset($action->_status);
         $action->save();
 
         return $action;
 
 	}
+
 
 }

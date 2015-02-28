@@ -25,37 +25,49 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 * @param  string $attrs 
 	 * @return array 
 	 */
-	public function createWithAction($attrs) {
+	public function create($attrs) {
 
 		//if no comment/reply status remains new
-		$attrs['status'] = $attrs['reply'] == '' && $attrs['comment'] == '' ? 'new' : $attrs['status'];
+		$attrs['status'] = $attrs['reply_body'] == '' && $attrs['comment_body'] == '' ? 'new' : $attrs['status'];
 
 		//create ticket
 		$ticket = $this->model->create($attrs);
 
 		//create action type - create
 		$action = ['ticket_id' => $ticket->id, 'user_id' => Auth::user()->id];
-		$this->action->create(array_merge($action, ['type' => 'create']));
+
+		$this->action->create(array_merge($action, ['type' => 'create', 'title' => $attrs['title'], 'body' => $attrs['body']]));
 
 		//set a reply/comment time spent attr
-		$action['time_spent'] = $ticket->time_spent;
+		// $action['time_spent'] = $ticket->time_spent;
 
 		//only title in create action
-		unset($action['title']);
+		// unset($action['title']);
 
-		if ($attrs['reply'] != '') {
+		// if ($attrs['reply'] != '') {
 
-			$this->action->create(array_merge($action, ['body' => $attrs['reply'], 'type' => 'reply']));
+		// 	$type = 'reply';
 
-			unset($action['time_spent']);
+		// 	$type = $attrs['status'] == 'closed' ? 'close' : $type;
+		// 	$type = $attrs['status'] == 'resolved' ? 'resolve' : $type;
 
-		}
+		// 	$this->action->create(array_merge($action, ['body' => $attrs['reply'], 'type' => $type]));
 
-		if ($attrs['comment'] != '') {
+		// 	unset($action['time_spent']);
+		// 	$attrs['status'] == null;
 
-			$this->action->create(array_merge($action, ['body' => $attrs['reply'], 'type' => 'reply']));
+		// }
 
-		}
+		// if ($attrs['comment'] != '') {
+
+		// 	$type = 'comment';
+
+		// 	$type = $attrs['status'] == 'closed' ? 'close' : $type;
+		// 	$type = $attrs['status'] == 'resolved' ? 'resolve' : $type;
+
+		// 	$this->action->create(array_merge($action, ['body' => $attrs['comment'], 'type' => $type]));
+
+		// }
 
 		return $ticket;
 	}
@@ -192,28 +204,27 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	/**
 	 * Update ticket by a reply ticket action
 	 * 
-	 * @param  App\TicketAction $reply
-	 * @return App\Ticket
+	 * @param  array App\TicketAction::toArray() + ['status']
+	 * @return array App\Ticket::toArray() + ['old_status']
 	 */
-	public function updateByReply(TicketAction $reply) {
+	public function updateByReply($action) {
 
-		$ticket = $this->model->find($reply->ticket_id);
-		$old_status = $ticket->status;
+		$ticket = $this->model->find($action['ticket_id']);
+		$ticket_array['old_status'] = $ticket->status;
 
-		$ticket->last_action_at = $reply->created_at;
-		$ticket->time_spent += $reply->time_spent;
-		$ticket->status = $reply->_status;
+		$ticket->last_action_at = $action['created_at'];
+		$ticket->time_spent += $action['time_spent'];
+		$ticket->status = $action['status'];
 
-		if ($reply->_status == 'open') {
+		if ($action['status'] == 'open') {
 			$ticket->closed_at = null;
 		} else {
-			$ticket->closed_at = $reply->created_at;
+			$ticket->closed_at = $action['created_at'];
 		}
 
 		$ticket->save();
-		$ticket->_old_status = $old_status;
 
-		return $ticket;
+		return array_merge($ticket->toArray(), $ticket_array);
 	}
 
 	/**

@@ -102,22 +102,22 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane{{ Session::get('type') == null || Session::get('type') == 'reply' ? ' active' : '' }}" id="reply">
-						<div class="form-group{{ $errors->has('reply') ? ' has-error' : null }}">
+						<div class="form-group{{ $errors->has('reply_body') ? ' has-error' : null }}">
 							<div class="col-md-9">
-								<textarea class="textarea form-control input-sm" name="reply" placeholder="Enter a response here" style="height: 100px;">{{ Input::old('reply') }}</textarea>
-								@if ($errors->has('reply'))
-								<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('reply') }}</strong></span>
+								<textarea class="textarea form-control input-sm" name="reply_body" placeholder="Enter a response here" style="height: 100px;">{{ Input::old('reply_body') }}</textarea>
+								@if ($errors->has('reply_body'))
+								<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('reply_body') }}</strong></span>
 								@endif
 							</div>
 						</div>
 
 					</div>
 					<div class="tab-pane{{ Session::get('type') == 'comment' ? ' active' : '' }}" id="comment">
-						<div class="form-group{{ $errors->has('comment') ? ' has-error' : null }}">
+						<div class="form-group{{ $errors->has('comment_body') ? ' has-error' : null }}">
 							<div class="col-md-9">
-								<textarea class="textarea form-control input-sm" name="comment" placeholder="Enter a comment here" style="height: 100px;">{{ Input::old('comment') }}</textarea>
-								@if ($errors->has('comment'))
-								<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('comment') }}</strong></span>
+								<textarea class="textarea form-control input-sm" name="comment_body" placeholder="Enter a comment here" style="height: 100px;">{{ Input::old('comment_body') }}</textarea>
+								@if ($errors->has('comment_body'))
+								<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('comment_body') }}</strong></span>
 								@endif
 							</div>
 						</div>

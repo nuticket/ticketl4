@@ -8,9 +8,10 @@ use View, Request, Str, Auth, Redirect;
 
 class TicketsController extends BaseController {
 
-	public function __construct(TicketInterface $ticket, QueryValidator $queryValidator, TicketValidator $ticketValidator) {
+	public function __construct(TicketInterface $ticket, QueryValidator $queryValidator, TicketValidator $ticketValidator, TicketActionInterface $action) {
 
 		$this->tickets = $ticket;
+		$this->action = $action;
 		$this->queryValidator = $queryValidator;
 		$this->ticketValidator = $ticketValidator;
 	}
@@ -78,7 +79,19 @@ class TicketsController extends BaseController {
 
 		$attrs = $validator->getAttributes();
 
-		$ticket = $this->tickets->createWithAction($attrs);
+		$ticket = $this->tickets->create($attrs);
+		$attrs['ticket_id'] = $ticket['id'];
+		$attrs['status'] = $ticket['status '];
+
+		if ($attrs['reply_body'] != '') { 
+			$attrs['type'] = 'reply';
+			$this->action->create($attrs);
+		}
+
+		if ($attrs['comment_body'] != '') { 
+			$attrs['type'] = 'comment';
+			$this->action->create($attrs);
+		}
 
 		return Redirect::route('tickets.show', [$ticket['id']])
 			->with('message', 'Ticket #' . $ticket['id'] . ' sucessfully created.');

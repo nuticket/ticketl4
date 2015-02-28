@@ -19,9 +19,9 @@ class ValidationRules extends Validator {
         return false;
     }
 
-    public function validaterequiredWithOne() {
+    public function validateSometimesRequiredWith($attribute, $value, $parameters) {
 
-
+        dd($parameters);
     }
 
 }

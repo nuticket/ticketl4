@@ -17,5 +17,7 @@ interface TicketInterface {
 	public function whereTicketDept(array $values);
 
 	public function whereUser($id = '*');
+
+	public function create($attrs);
 	
 }
