@@ -3,7 +3,6 @@
 use App\Repositories\TicketInterface;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Ticket;
-use App\TicketAction;
 use Auth;
 
 class TicketRepository extends BaseRepository implements TicketInterface {
@@ -13,10 +12,9 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 * 
 	 * @param App\Ticket
 	 */
-	public function __construct(Ticket $model, TicketAction $action) {
+	public function __construct(Ticket $model) {
 
 		$this->model = $model;
-		$this->action = $action;
 
 	}
 	/**
@@ -266,15 +264,15 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	/**
 	 * Update ticket by a assign ticket action.
 	 * 
-	 * @param  App\TicketAction $assign
+	 * @param  array $action App\TicketAction::toArray()
 	 * @return App\Ticket
 	 */
-	public function updateByAssign(TicketAction $assign) {
+	public function updateByAssign(array $action) {
 
-		$ticket = $this->model->find($assign->ticket_id);
+		$ticket = $this->model->find($action['ticket_id']);
 
-		$ticket->last_action_at = $assign->created_at;
-		$ticket->staff_id = $assign->assigned_id;
+		$ticket->last_action_at = $action['created_at'];
+		$ticket->staff_id = $action['assigned_id'];
 
 		$ticket->save();
 

@@ -5,7 +5,7 @@
   [x] Reformat show page with new title/body db schema change. @done (15-02-23 19:53)
   [x] Refactor reply action on show. @done (15-02-28 08:20)
   [x] Refactor comment action on show. @done (15-02-28 08:42)
-  [ ] Refactor transfer action on show.
+  [x] Refactor transfer action on show. @done (15-02-28 08:52)
   [ ] Refactor assign action on show.
   [ ] Refactor reply action with ticket create.
   [ ] Refactor comment action with ticket create.
