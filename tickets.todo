@@ -6,9 +6,9 @@
   [x] Refactor reply action on show. @done (15-02-28 08:20)
   [x] Refactor comment action on show. @done (15-02-28 08:42)
   [x] Refactor transfer action on show. @done (15-02-28 08:52)
-  [ ] Refactor assign action on show.
-  [ ] Refactor reply action with ticket create.
-  [ ] Refactor comment action with ticket create.
+  [x] Refactor assign action on show. @done (15-02-28 08:59)
+  [x] Refactor reply action with ticket create. @done (15-02-28 11:16)
+  [x] Refactor comment action with ticket create. @done (15-02-28 11:16)
   [ ] Adjust sql migration scripts to add 1 sec to non-create actions
   [ ] Adjust ticket create to add 1 sec to reply/comment actions added
   [x] Test add actions on show page. @done (15-02-23 20:55)
@@ -20,3 +20,4 @@
   [ ] HLC/TT package.
   [ ] LDAP package.
   [ ] Add user organizations. 
+  [ ] Add random ticket numbers.

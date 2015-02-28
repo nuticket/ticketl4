@@ -81,14 +81,17 @@ class TicketsController extends BaseController {
 
 		$ticket = $this->tickets->create($attrs);
 		$attrs['ticket_id'] = $ticket['id'];
-		$attrs['status'] = $ticket['status '];
+		$attrs['status'] = $ticket['status'];
 
 		if ($attrs['reply_body'] != '') { 
-			$attrs['type'] = 'reply';
+			$attrs['body'] = $attrs['reply_body'];
+			$attrs['type'] = in_array($attrs['status'], ['closed', 'resolved']) ? $attrs['status'] : 'reply';
 			$this->action->create($attrs);
+			unset($attrs['time_spent']);
 		}
 
 		if ($attrs['comment_body'] != '') { 
+			$attrs['body'] = $attrs['comment_body'];
 			$attrs['type'] = 'comment';
 			$this->action->create($attrs);
 		}

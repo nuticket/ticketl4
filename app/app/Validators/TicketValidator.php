@@ -27,7 +27,7 @@ class TicketValidator extends ContextualValidator
     {
         $validator->sometimes(['reply_body', 'comment_body'], 'required_with:time_spent,status', function($input)
         {
-            return $input->reply == '' && $input->comment == '';
+            return $input->reply_body == '' && $input->comment_body == '';
         });
     }
 

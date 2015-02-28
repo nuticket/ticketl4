@@ -3,6 +3,7 @@
 use App\Repositories\TicketInterface;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Ticket;
+use App\TicketAction;
 use Auth;
 
 class TicketRepository extends BaseRepository implements TicketInterface {
@@ -12,9 +13,10 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 * 
 	 * @param App\Ticket
 	 */
-	public function __construct(Ticket $model) {
+	public function __construct(Ticket $model, TicketAction $action) {
 
 		$this->model = $model;
+		$this->action = $action;
 
 	}
 	/**
@@ -32,40 +34,8 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 		$ticket = $this->model->create($attrs);
 
 		//create action type - create
-		$action = ['ticket_id' => $ticket->id, 'user_id' => Auth::user()->id];
-
-		$this->action->create(array_merge($action, ['type' => 'create', 'title' => $attrs['title'], 'body' => $attrs['body']]));
-
-		//set a reply/comment time spent attr
-		// $action['time_spent'] = $ticket->time_spent;
-
-		//only title in create action
-		// unset($action['title']);
-
-		// if ($attrs['reply'] != '') {
-
-		// 	$type = 'reply';
-
-		// 	$type = $attrs['status'] == 'closed' ? 'close' : $type;
-		// 	$type = $attrs['status'] == 'resolved' ? 'resolve' : $type;
-
-		// 	$this->action->create(array_merge($action, ['body' => $attrs['reply'], 'type' => $type]));
-
-		// 	unset($action['time_spent']);
-		// 	$attrs['status'] == null;
-
-		// }
-
-		// if ($attrs['comment'] != '') {
-
-		// 	$type = 'comment';
-
-		// 	$type = $attrs['status'] == 'closed' ? 'close' : $type;
-		// 	$type = $attrs['status'] == 'resolved' ? 'resolve' : $type;
-
-		// 	$this->action->create(array_merge($action, ['body' => $attrs['comment'], 'type' => $type]));
-
-		// }
+		$action = ['ticket_id' => $ticket->id, 'user_id' => Auth::user()->id, 'type' => 'create', 'title' => $attrs['title'], 'body' => $attrs['body']];
+		$this->action->create($action);
 
 		return $ticket;
 	}

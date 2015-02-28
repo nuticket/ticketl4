@@ -16,7 +16,12 @@ class TicketActionRepository implements TicketActionInterface {
 
     public function create(array $attrs) {
 
-        $attrs['body'] = nl2br($attrs[$attrs['type'] . '_body']);
+        //this has got to go, only need $attrs['body']
+        if (isset($attrs[$attrs['type'] . '_body'])) {
+            $attrs['body'] = $attrs[$attrs['type'] . '_body'];
+        }
+        $attrs['body'] = nl2br($attrs['body']);
+
         $attrs['user_id'] = Auth::user()->id; //move to controller
 
         return $this->action->create($attrs);
