@@ -3,7 +3,7 @@
   [x] Add time_spent type to actions. @done (15-02-23 19:09)
   [ ] Create ldap sync. http://forums.asp.net/t/1626324.aspx?How+to+get+Unique+ID+of+LDAP+UserName
   [x] Reformat show page with new title/body db schema change. @done (15-02-23 19:53)
-  [ ] Refactor reply action on show.
+  [x] Refactor reply action on show. @done (15-02-28 08:20)
   [ ] Refactor comment action on show.
   [ ] Refactor transfer action on show.
   [ ] Refactor assign action on show.

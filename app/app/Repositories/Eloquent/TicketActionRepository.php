@@ -14,7 +14,7 @@ class TicketActionRepository implements TicketActionInterface {
 
 	}
 
-    public function create($attrs) {
+    public function create(array $attrs) {
 
         $attrs['body'] = nl2br($attrs[$attrs['type'] . '_body']);
         $attrs['user_id'] = Auth::user()->id; //move to controller
@@ -28,7 +28,7 @@ class TicketActionRepository implements TicketActionInterface {
      * @param  array $attrs ['type', 'body', 'status', 'ticket_id', 'time_spent']
      * @return App\TicketAction
      */
-	public function createAndUpdateTicket($attrs) {
+	public function createAndUpdateTicket(array $attrs) {
 
 		$action = $this->create($attrs);
         

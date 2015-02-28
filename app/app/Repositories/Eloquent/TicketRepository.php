@@ -204,10 +204,10 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	/**
 	 * Update ticket by a reply ticket action
 	 * 
-	 * @param  array App\TicketAction::toArray() + ['status']
-	 * @return array App\Ticket::toArray() + ['old_status']
+	 * @param  array App\TicketAction::toArray() + $action['status']
+	 * @return array App\Ticket::toArray() + $['old_status']
 	 */
-	public function updateByReply($action) {
+	public function updateByReply(array $action) {
 
 		$ticket = $this->model->find($action['ticket_id']);
 		$ticket_array['old_status'] = $ticket->status;
@@ -230,15 +230,15 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	/**
 	 * Update ticket by a comment ticket action.
 	 * 
-	 * @param  App\TicketAction $comment
+	 * @param  array App\TicketAction::toArray()
 	 * @return App\Ticket
 	 */
-	public function updateByComment(TicketAction $comment) {
+	public function updateByComment(array $action) {
 
-		$ticket = $this->model->find($comment->ticket_id);
+		$ticket = $this->model->find($action['ticket_id']);
 
-		$ticket->last_action_at = $comment->created_at;
-		$ticket->time_spent += $comment->time_spent;
+		$ticket->last_action_at = $action['created_at'];
+		$ticket->time_spent += $action['time_spent'];
 
 		$ticket->save();
 

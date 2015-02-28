@@ -2,6 +2,8 @@
 
 interface TicketActionInterface {
 
-	public function create($attr);
+	public function create(array $attr);
+
+	public function createAndUpdateTicket(array $attrs);
 	
 }

@@ -27,7 +27,10 @@ class TicketActionsController extends BaseController {
 		} else {
 
 			$attrs = array_merge($actionValidator->getAttributes(), ['type' => $type]);
-			$attrs['status'] = $attrs[$type . '_status'];
+
+			if (isset($attrs[$type . '_status'])) {
+	            $attrs['status'] = $attrs[$type . '_status'];
+	        }
 
 			if (isset($attrs[$type . '_time'])) {
 	            $attrs['time_spent'] = $attrs[$type . '_time'];
