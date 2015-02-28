@@ -230,7 +230,7 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	/**
 	 * Update ticket by a comment ticket action.
 	 * 
-	 * @param  array App\TicketAction::toArray()
+	 * @param  array $action App\TicketAction::toArray()
 	 * @return App\Ticket
 	 */
 	public function updateByComment(array $action) {
@@ -248,15 +248,15 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	/**
 	 * Update ticket by a transfer ticket action.
 	 * 
-	 * @param  App\TicketAction $transfer
+	 * @param  array $action App\TicketAction::toArray()
 	 * @return App\Ticket
 	 */
-	public function updateByTransfer(TicketAction $transfer) {
+	public function updateByTransfer(array $action) {
 
-		$ticket = $this->model->find($transfer->ticket_id);
+		$ticket = $this->model->find($action['ticket_id']);
 
-		$ticket->last_action_at = $transfer->created_at;
-		$ticket->ticket_dept_id = $transfer->transfer_id;
+		$ticket->last_action_at = $action['created_at'];
+		$ticket->dept_id = $action['transfer_id'];
 
 		$ticket->save();
 

@@ -21,7 +21,7 @@ class TicketActionValidator extends ContextualValidator
         ],
         'transfer' => [
             'transfer_body' => 'required|min:3',
-            'transfer_id' => ['required', 'numeric', 'exists:ticket_depts,id']
+            'transfer_id' => ['required', 'numeric', 'exists:depts,id']
         ],
         'assign' => [
             'assign_body' => 'required|min:3',
