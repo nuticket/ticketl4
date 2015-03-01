@@ -1,0 +1,17 @@
+<?php 
+
+return [
+	'Tickets' => [
+		'public' => true,
+		'children' => [
+			'Tickets' => [
+				'route' => 'tickets.index',
+				'public' => true
+			],
+			'Create Ticket' => [
+				'route' => 'tickets.create',
+				'public' => true
+			]
+		] 
+	]
+];

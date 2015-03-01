@@ -1,0 +1,81 @@
+<?php namespace App\Services;
+
+use Illuminate\Foundation\Application;
+use Lavary\Menu\Builder;
+
+class Menu {
+
+	/**
+	 * Create a Menu instance
+	 * 			
+	 * @param Illuminate\Foundation\Application $app
+	 */
+	public function __construct(Application $app) {
+		$this->app = $app;
+	}
+
+	/**
+	 * Create a Menu
+	 * 	
+	 * @param  string $namespace
+	 * @param  array|null $config
+	 * @return void
+	 */
+	public function make($namespace, array $config = null) {
+
+		if (!$config) {
+			$config = $this->app['config']->get('menu');
+		}
+		
+
+		$this->app['menu']->make($namespace, function($menu) use($config) {
+		  	
+		  	$this->build($config, $menu);
+
+
+		})->filter(function($item){
+			if ($item->data('public')) { return true; }
+
+			if (!$item->data('public') && $this->app['auth']->user()->staff) {
+				return true;
+			}
+  			return false;
+		});;
+	}
+
+	/**
+	 * Build a level of menu
+	 * 
+	 * @param  array  $config 
+	 * @param  Lavary\Menu\Builder $menu
+	 * @param  string|null $namespace
+	 * @return void
+	 */
+	protected function build(array $config, Builder $menu, $namespace = null) {
+
+		foreach ($config as $key => $value) {
+
+			$route = null;
+
+			if (isset($value['route'])) {
+				$route = ['route' => $value['route']];
+			}
+
+			if ($namespace) {
+
+				$menu->get(strtolower($namespace))->add($key, $route)->data('public', $value['public']);
+
+			} else {
+
+				$menu->add($key, $route)->data('public', $value['public']);
+
+			}
+			
+			if (isset($value['children'])) {
+
+				$this->build($value['children'], $menu, $key);
+			}
+		}
+
+	}
+}
