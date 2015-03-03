@@ -13,8 +13,9 @@
   [ ] Adjust ticket create to add 1 sec to reply/comment actions added
   [x] Test add actions on show page. @done (15-02-23 20:55)
   [ ] Convert depts dropdowns to use options and remove from javascript on master blade
-  [ ] Create staff hours report.
+  [x] Create staff performance report. @done (15-03-03 15:46)
   [ ] Add icon abiltiy to menu config.
+  [ ] Add Dept Summary report.
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
@@ -28,3 +29,6 @@
   [ ] Add print option to reports.
   [ ] Add email report to reports.
   [ ] Settings.
+  [ ] Add drill down filter for reports.
+  [ ] Add link filter for reports.
+  [ ] Add pre-config buttons for variables in reports.

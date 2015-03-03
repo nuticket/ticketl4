@@ -1,5 +1,19 @@
 <?php
 
+if ( ! function_exists('menu_icon'))
+{
+	function menu_icon($string) {
+		
+		$icons = [
+			'Tickets' => 'ticket',
+			'Reports' => 'book'
+		];
+
+		return $icons[$string];
+
+	}
+}
+
 if ( ! function_exists('config'))
 {
 	function config($string, $default = null) {

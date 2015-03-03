@@ -3,7 +3,7 @@
                         @foreach ($items as $item)
                         <li class="{{ isset($item->attributes['class']) ? 'active' : '' }}{{ $item->hasChildren() ? ' treeview' : '' }}">
                             <a href="{{ $item->url() }}">
-                                <i class="fa fa-@if($item->nickname == 'tickets')ticket @elseif($item->nickname == 'knowledgeBase')book @else{{ $item->nickname }} @endif"></i> <span>{{ $item->title }}</span>
+                                <i class="fa fa-{{ menu_icon($item->title) }}"></i> <span>{{ $item->title }}</span>
                                 @if ($item->hasChildren())
                                 <i class="fa fa-angle-left pull-right"></i>
                                 @endif
