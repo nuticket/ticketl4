@@ -12,6 +12,9 @@
   [ ] Adjust sql migration scripts to add 1 sec to non-create actions
   [ ] Adjust ticket create to add 1 sec to reply/comment actions added
   [x] Test add actions on show page. @done (15-02-23 20:55)
+  [ ] Convert depts dropdowns to use options and remove from javascript on master blade
+  [ ] Create staff hours report.
+  [ ] Add icon abiltiy to menu config.
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
@@ -21,3 +24,7 @@
   [ ] LDAP package.
   [ ] Add user organizations. 
   [ ] Add random ticket numbers.
+  [ ] Add excel export to reports.
+  [ ] Add print option to reports.
+  [ ] Add email report to reports.
+  [ ] Settings.

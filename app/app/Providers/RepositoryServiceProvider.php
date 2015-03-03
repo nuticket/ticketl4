@@ -11,6 +11,8 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind('App\Repositories\UserInterface', 'App\Repositories\Eloquent\UserRepository');
         $this->app->bind('App\Repositories\DeptInterface', 'App\Repositories\Eloquent\DeptRepository');
         $this->app->bind('App\Repositories\StaffInterface', 'App\Repositories\Eloquent\StaffRepository');
+        
+        $this->app->bind('App\Repositories\ReportInterface', 'App\Repositories\DB\ReportRepository');
     }
 
 }

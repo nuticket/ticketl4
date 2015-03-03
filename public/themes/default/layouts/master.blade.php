@@ -165,6 +165,17 @@
                     data: [@foreach(App\Staff::all() as $row){id:{{ $row->id }},text:'{{ $row->user->display_name }}'},@endforeach]
               });
                 $('#createtime').daterangepicker();
+                $('.daterange').daterangepicker({
+                    opens: 'left',
+                    ranges: {
+                     'Today': [moment(), moment()],
+                     'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                     'This Week': [moment().startOf('week'), moment().endOf('week')],
+                     'Last Week': [moment().subtract('weeks', 1).startOf('week'), moment().subtract('weeks', 1).endOf('week')],
+                     'This Month': [moment().startOf('month'), moment().endOf('month')],
+                     'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                  },
+                });
                 // $(".textarea").wysihtml5({
                 //         "size": "sm" // options are xs, sm, lg
                 // });

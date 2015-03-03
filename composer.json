@@ -10,7 +10,8 @@
 		"crhayes/validation": "0.7",
 		"orchestra/view": "2.2.3",
 		"adldap/adldap": "4.0.x",
-		"lavary/laravel-menu": "1.5.0"
+		"lavary/laravel-menu": "1.5.0",
+		"pyrocms/lex": "2.2.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "4.0.*",

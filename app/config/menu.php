@@ -13,5 +13,19 @@ return [
 				'public' => true
 			]
 		] 
+	],
+
+	'Reports' => [
+		'public' => true,
+		'children' => [
+			'Staff Performance' => [
+				'url' => 'report/staff-performance',
+				'public' => true
+			],
+			'Another Report' => [
+				'route' => 'dash.index',
+				'public' => true
+			]
+		]
 	]
 ];

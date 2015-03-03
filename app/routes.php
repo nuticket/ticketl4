@@ -28,10 +28,9 @@ Route::group(['namespace' => 'App\\Controllers', 'before' => 'ui'], function() {
 		Route::get('tickets/{ticket}', array('as' => 'tickets.show', 'uses' => 'TicketsController@show'));
 		
 		Route::post('actions/{type?}', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|assign)');
-		// Route::post('actions/comment', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
-		// Route::post('actions/transfer', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
-		// Route::post('actions/reassign', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|reassign)');
-		// 
+
+		Route::get('report/{report}', array('as' => 'report.index', 'uses' => 'ReportController@index'));
+
 	});
 
 });

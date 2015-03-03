@@ -61,6 +61,10 @@ class Menu {
 				$route = ['route' => $value['route']];
 			}
 
+			if (isset($value['url'])) {
+				$route = $value['url'];
+			}
+
 			if ($namespace) {
 
 				$menu->get(strtolower($namespace))->add($key, $route)->data('public', $value['public']);
