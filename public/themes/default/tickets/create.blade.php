@@ -33,7 +33,7 @@
 							@endforeach
 						</select>
 						@if ($errors->has('user_id'))
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('user_id') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('user_id') }}</strong></span>
 						@endif
 					</div>
 				</div>
@@ -47,7 +47,7 @@
 							@endforeach
 						</select>
 						@if ($errors->has('dept_id'))
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('dept_id') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('dept_id') }}</strong></span>
 						@endif
 					</div>
 				</div>
@@ -61,7 +61,7 @@
 							@endforeach
 						</select>
 						@if ($errors->has('staff_id'))
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('staff_id') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('staff_id') }}</strong></span>
 						@endif
 					</div>
 				</div>
@@ -77,7 +77,7 @@
 							<option value="5"{{ Input::old('priority') == '5' ? ' selected=selected' : null }}>5 - Increase productivity/savings</option>
 						</select>
 						@if ($errors->has('priority'))
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('priority') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('priority') }}</strong></span>
 						@endif
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 					<div class="col-sm-9">
 						<input name="title" type="text" class="form-control pull-right input-sm" value="{{ Input::old('title') }}">
 						@if ($errors->has('title'))
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('title') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('title') }}</strong></span>
 						@endif
 					</div>
 				</div>
@@ -94,6 +94,9 @@
 					<label for="body" class="col-sm-1 control-label">Details</label>
 					<div class="col-sm-9">
 						<textarea name="body" rows="5" class="form-control pull-right input-sm">{{ Input::old('body') }}</textarea>
+						@if ($errors->has('body'))
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('body') }}</strong></span>
+						@endif
 					</div>
 				</div>
 				<ul class="nav nav-tabs">
@@ -106,7 +109,7 @@
 							<div class="col-md-9">
 								<textarea class="textarea form-control input-sm" name="reply_body" placeholder="Enter a response here" style="height: 100px;">{{ Input::old('reply_body') }}</textarea>
 								@if ($errors->has('reply_body'))
-								<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('reply_body') }}</strong></span>
+								<span id="helpBlock" class="help-block"><strong>{{ $errors->first('reply_body') }}</strong></span>
 								@endif
 							</div>
 						</div>
@@ -117,7 +120,7 @@
 							<div class="col-md-9">
 								<textarea class="textarea form-control input-sm" name="comment_body" placeholder="Enter a comment here" style="height: 100px;">{{ Input::old('comment_body') }}</textarea>
 								@if ($errors->has('comment_body'))
-								<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('comment_body') }}</strong></span>
+								<span id="helpBlock" class="help-block"><strong>{{ $errors->first('comment_body') }}</strong></span>
 								@endif
 							</div>
 						</div>
@@ -131,7 +134,7 @@
 					</div>
 					@if ($errors->has('time_spent'))
 					<div class="col-md-10">
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('time_spent') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('time_spent') }}</strong></span>
 					</div>
 					@endif
 				</div> -->
@@ -164,12 +167,12 @@
 				<div class="row">
 					<div class="col-md-4">
 						@if ($errors->has('status'))
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('status') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('status') }}</strong></span>
 						@endif
 					</div>
 					<div class="col-md-4">
 						@if ($errors->has('time_spent'))
-						<span id="helpBlock" class="help-block"><strong class="text-danger">{{ $errors->first('time_spent') }}</strong></span>
+						<span id="helpBlock" class="help-block"><strong>{{ $errors->first('time_spent') }}</strong></span>
 						@endif
 					</div>
 				</div>

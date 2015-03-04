@@ -12,16 +12,16 @@
   [ ] Adjust sql migration scripts to add 1 sec to non-create actions
   [ ] Adjust ticket create to add 1 sec to reply/comment actions added
   [x] Test add actions on show page. @done (15-02-23 20:55)
-  [ ] Convert depts dropdowns to use options and remove from javascript on master blade
   [x] Create staff performance report. @done (15-03-03 15:46)
-  [ ] Add icon abiltiy to menu config.
+  [x] Add icon abiltiy to default theme sidebar menu. @done (15-03-03 16:26)
   [ ] Add Dept Summary report.
+  [ ] Remember Me.
+  [ ] HLC/TT package.
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
   [ ] Convert app to Laravel 5, ensure dependencies are compatible.
   [ ] Move to AdminLTE 2.0.
-  [ ] HLC/TT package.
   [ ] LDAP package.
   [ ] Add user organizations. 
   [ ] Add random ticket numbers.
@@ -32,3 +32,7 @@
   [ ] Add drill down filter for reports.
   [ ] Add link filter for reports.
   [ ] Add pre-config buttons for variables in reports.
+  [ ] Cleanup default theme helpers.
+  [ ] Convert depts dropdowns to use options and remove from javascript on master blade.
+  [ ] Breadcrumbs.
+  [ ] Localization.
