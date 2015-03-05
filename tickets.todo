@@ -1,5 +1,5 @@
 1.0.0:
-  [ ] Make errors colors same on ticket create.
+  [x] Make errors colors same on ticket create. @done (15-03-03 21:53)
   [x] Add time_spent type to actions. @done (15-02-23 19:09)
   [ ] Create ldap sync. http://forums.asp.net/t/1626324.aspx?How+to+get+Unique+ID+of+LDAP+UserName
   [x] Reformat show page with new title/body db schema change. @done (15-02-23 19:53)
@@ -17,6 +17,10 @@
   [ ] Add Dept Summary report.
   [ ] Remember Me.
   [ ] HLC/TT package.
+  [ ] Remove breadcrumb placers for now.
+  [ ] ticket_dept_id errors on search in ticket list.
+  [ ] Validation error when single day selected in daterange in reports.
+  [ ] Add page meta to all pages.
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
@@ -36,3 +40,4 @@
   [ ] Convert depts dropdowns to use options and remove from javascript on master blade.
   [ ] Breadcrumbs.
   [ ] Localization.
+  [ ] Move to Apache.
