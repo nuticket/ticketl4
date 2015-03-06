@@ -21,6 +21,7 @@
   [ ] ticket_dept_id errors on search in ticket list.
   [ ] Validation error when single day selected in daterange in reports.
   [ ] Add page meta to all pages.
+  [ ] Remove configs from app/config/adldap.php
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
