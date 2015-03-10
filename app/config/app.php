@@ -126,11 +126,14 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		'Indatus\Dispatcher\ServiceProvider',
 		'Lavary\Menu\ServiceProvider',
 		'Orchestra\View\DecoratorServiceProvider',
 	    'Orchestra\View\ViewServiceProvider',
 	    'Orchestra\Memory\CommandServiceProvider',
 	    'Orchestra\Memory\MemoryServiceProvider',
+
+	    'Nuticket\Hlc\HlcServiceProvider',
 
 	),
 

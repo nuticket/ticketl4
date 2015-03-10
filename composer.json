@@ -9,9 +9,10 @@
 		"laravel/framework": "4.2.*",
 		"crhayes/validation": "0.7",
 		"orchestra/view": "2.2.3",
-		"adldap/adldap": "4.0.x",
+		"adldap/adldap": "dev-master",
 		"lavary/laravel-menu": "1.5.0",
-		"pyrocms/lex": "2.2.*"
+		"pyrocms/lex": "2.2.*",
+		"indatus/dispatcher": "~1.4"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "4.0.*",
@@ -22,6 +23,12 @@
     	"codeception/codeception": "*",
     	"mockery/mockery": "dev-master"
 	},
+	"repositories": [
+	    {
+	        "type": "git",
+	        "url": "https://github.com/adldap/adLDAP.git"
+	    }
+	],
 	"autoload": {
 		"classmap": [
 			"app/database/migrations",

@@ -8,10 +8,7 @@ use Carbon\Carbon;
 
 class Ticket extends Eloquent {
 
-	protected $table = 'tickets';
-
-
-	 protected $fillable = [
+	protected $fillable = [
         'last_action_at', 
         'user_id', 
         'priority', 
@@ -21,7 +18,7 @@ class Ticket extends Eloquent {
         'time_spent'
     ];
 
-
+    protected $dates = ['last_action_at', 'closed_at'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

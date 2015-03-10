@@ -3,7 +3,7 @@
 return array(
     'account_suffix' => $_ENV['ADLDAP_ACCOUNT_SUFFIX'],
 
-    'domain_controllers' => $_ENV['ADLDAP_DOMAIN_CONTROLLERS'], // An array of domains may be provided for load balancing.
+    'domain_controllers' => explode('|', $_ENV['ADLDAP_DOMAIN_CONTROLLERS']), // An array of domains may be provided for load balancing.
 
     'base_dn' => $_ENV['ADLDAP_BASE_DN'],
 
@@ -18,7 +18,7 @@ return array(
 
     'recursive_groups' => true,
 
-    'org_names' => $_ENV['ADLDAP_ORG_NAMES']
+    'org_names' => explode('|', $_ENV['ADLDAP_ORG_NAMES'])
 
 
 );
