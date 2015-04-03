@@ -6,6 +6,10 @@ use Exception;
 
 abstract class BaseRepository {
 
+	public function update($id, array $data) {
+		$this->model->where('id', $id)->update($data);
+	}
+
 	/**
 	 * Sort the model
 	 * @param  string $col
@@ -85,7 +89,7 @@ abstract class BaseRepository {
 			return $this;
 		}
 
-		$this->model->whereIn($col, $values);
+		$this->model = $this->model->whereIn($col, $values);
 
 		return $this;
 

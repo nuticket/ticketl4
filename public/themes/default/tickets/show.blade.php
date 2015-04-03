@@ -22,6 +22,20 @@
 				<!-- timeline time label -->
 				<li class="time-label">
 					<span class="bg-red">{{ $ticket['created_at']->format('j M Y'); $lastday = $ticket['created_at'] }}</span>
+					<div class="btn-group pull-right">
+						<a href="#reply" class="btn btn-default go-show-tab">Reply</a>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#comment" class="go-show-tab">Comment</a></li>
+							<li><a href="#transfer" class="go-show-tab">Transfer</a></li>
+							<li><a href="#assign" class="go-show-tab">Assign</a></li>
+							<li class="divider"></li>
+							<li><a href="{{ route('tickets.edit', $ticket['id']) }}">Edit</a></li>
+						</ul>
+                    </div>
 				</li>
 				<!-- /.timeline-label -->
 				<!-- timeline item -->
@@ -254,6 +268,9 @@
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Details</h3>
+					{{-- <div class="box-tools pull-right">
+	                    <button class="btn btn-box-tool btn-block btn-sm">Edit</button>
+                  	</div> --}}
 				</div><!-- /.box-header -->
 				<!-- form start -->
 				<form role="form">

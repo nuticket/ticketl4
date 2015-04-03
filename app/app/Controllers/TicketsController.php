@@ -60,7 +60,6 @@ class TicketsController extends BaseController {
 	}
 
 	public function create() {
-		// $errors = null;
 		return View::make('tickets.create');
 	}
 
@@ -99,6 +98,75 @@ class TicketsController extends BaseController {
 		return Redirect::route('tickets.show', [$ticket['id']])
 			->with('message', 'Ticket #' . $ticket['id'] . ' sucessfully created.');
 
+	}
+
+	public function edit($id) {
+		$ticket = $this->tickets->find($id);
+		return View::make('tickets.edit', compact('ticket'));
+	}
+
+	public function update($id) {
+
+		$validator = $this->ticketValidator->make(Request::all())->addContext('edit');
+
+		if ($validator->fails()) {
+
+			return Redirect::route('tickets.edit', [$id])
+		  		->withErrors($validator)
+		  		->withInput(); 
+		}
+
+		$attrs = $validator->getAttributes();
+
+		//get old ticket/sction data so we can see if anything is changing
+		$old_ticket = $this->tickets->find($id);
+		$old_create = $this->action->findTicketCreate($id);
+
+		//lets see what's exactly changing
+		$changed = [];
+		
+		if ($attrs['user_id'] != $old_ticket['user_id']) {
+			$changed[] = 'user_id';
+		}	
+
+		if ($attrs['priority'] != $old_ticket['priority']) {
+			$changed[] = 'priority';
+		}	
+
+		if ($attrs['title'] != $old_create['title']) {
+			$changed[] = 'title';
+		}
+
+		if ($attrs['body'] != $old_create['body']) {
+			$changed[] = 'body';
+		}
+
+		//no changes, user is wasting our time
+		if (empty($changed)) {
+	
+			return Redirect::route('tickets.edit', [$id])
+				->with('message', 'There were no changes made to this ticket.')
+				->withInput();
+		}
+
+		//update ticket/create action
+		$this->tickets->update($id, array_only($attrs, ['user_id', 'priority']));
+		$this->action->update($old_create['id'], array_only($attrs, ['body', 'title']));
+
+		//lets create a edit action
+		$body = '';
+		foreach ($changed as $change) {
+			$body .= $change . ' changed from ' . $old_ticket[$change] . ' to ' . $attrs[$change] . "\n";
+		}
+
+		$new_action = $this->action->create([
+			'ticket_id' => $id,
+			'user_id' => Auth::user()->id,
+			'type' => 'edit',
+			'body' => $body . "\n" . $attrs['reason']
+		]);
+
+		return Redirect::route('tickets.show', [$id, '#action-' . $new_action['id']]);
 	}
 
 }

@@ -1,15 +1,17 @@
 <?php namespace App\Repositories\Eloquent;
 
 use App\Repositories\TicketActionInterface;
+use App\Repositories\Eloquent\BaseRepository;
 use App\Repositories\Eloquent\TicketRepository;
 use App\TicketAction;
 use Illuminate\Support\Facades\Auth;
 
-class TicketActionRepository implements TicketActionInterface {
+class TicketActionRepository extends BaseRepository implements TicketActionInterface {
 
 	public function __construct(TicketAction $action, TicketRepository $ticket) {
 		
-		$this->action = $action;
+        $this->action = $action;
+		$this->model = $action;
 		$this->ticket = $ticket;
 
 	}
@@ -56,5 +58,9 @@ class TicketActionRepository implements TicketActionInterface {
 
 	}
 
+    public function findTicketCreate($id) {
 
+        $result = $this->model->where('ticket_id', $id)->where('type', 'create')->get()->toArray();
+        return $result[0];
+    }
 }

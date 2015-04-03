@@ -1,4 +1,4 @@
-1.0.0:
+0.9.0:
   [x] Make errors colors same on ticket create. @done (15-03-03 21:53)
   [x] Add time_spent type to actions. @done (15-02-23 19:09)
   [x] Create ldap sync. http://forums.asp.net/t/1626324.aspx?How+to+get+Unique+ID+of+LDAP+UserName @done (15-03-10 12:10)
@@ -9,8 +9,6 @@
   [x] Refactor assign action on show. @done (15-02-28 08:59)
   [x] Refactor reply action with ticket create. @done (15-02-28 11:16)
   [x] Refactor comment action with ticket create. @done (15-02-28 11:16)
-  [ ] Adjust sql migration scripts to add 1 sec to non-create actions
-  [ ] Adjust ticket create to add 1 sec to reply/comment actions added
   [x] Test add actions on show page. @done (15-02-23 20:55)
   [x] Create staff performance report. @done (15-03-03 15:46)
   [x] Add icon abiltiy to default theme sidebar menu. @done (15-03-03 16:26)
@@ -22,6 +20,8 @@
   [ ] Validation error when single day selected in daterange in reports.
   [ ] Add page meta to all pages.
   [x] Remove configs from app/config/adldap.php @done (15-03-05 19:33)
+  [x] Adjust ticket create to add 1 sec to reply/comment actions added @done (15-03-11 15:11)
+  [x] Edit  @done (15-04-03 10:44)
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)
@@ -42,3 +42,6 @@
   [ ] Breadcrumbs.
   [ ] Localization.
   [ ] Move to Apache?
+  [ ] Add select2 to dropdowns in action boxes on ticket create.
+  [ ] Add status (setting) to comment action on ticket create.
+  [ ] Fontfamily is different from select2 and and other form elements.

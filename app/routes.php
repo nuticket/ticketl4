@@ -11,25 +11,34 @@
 |
 */
 
-Route::group(['namespace' => 'App\\Controllers', 'before' => 'ui'], function() {
+Route::group(['namespace' => 'App\\Controllers'], function() {
+
+	Route::group(['before' => 'ui|csfr'], function() {
 
 	
-	Route::get('session/start', array('as' => 'session.start', 'uses' => 'SessionController@getStart'));
-	Route::post('session/start', array('as' => 'session.post', 'uses' => 'SessionController@postStart'));
-	
-
-	Route::group(array('before' => 'auth'), function() {
-
-		Route::get('session/end', array('as' => 'session.end', 'uses' => 'SessionController@getEnd'));
-		Route::get('/', array('as' => 'dash.index', 'uses' => 'DashController@getIndex'));
-		Route::get('tickets', array('as' => 'tickets.index', 'uses' => 'TicketsController@index'));
-		Route::get('tickets/create', array('as' => 'tickets.create', 'uses' => 'TicketsController@create'));
-		Route::post('tickets/create', array('as' => 'tickets.store', 'uses' => 'TicketsController@store'));
-		Route::get('tickets/{ticket}', array('as' => 'tickets.show', 'uses' => 'TicketsController@show'));
+		Route::get('session/start', array('as' => 'session.start', 'uses' => 'SessionController@getStart'));
+		Route::post('session/start', array('as' => 'session.post', 'uses' => 'SessionController@postStart'));
 		
-		Route::post('actions/{type?}', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|assign)');
 
-		Route::get('report/{report}', array('as' => 'report.index', 'uses' => 'ReportController@index'));
+		Route::group(array('before' => 'auth'), function() {
+
+			Route::get('session/end', array('as' => 'session.end', 'uses' => 'SessionController@getEnd'));
+			Route::get('/', array('as' => 'dash.index', 'uses' => 'DashController@getIndex'));
+
+			Route::resource('tickets', 'TicketsController', ['except' => ['destroy']]); 
+			
+			Route::post('actions/{type?}', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|assign)');
+
+			Route::get('report/{report}', array('as' => 'report.index', 'uses' => 'ReportController@index'));
+		});
+
+	});
+
+	Route::group(['namespace' => 'Api', 'prefix' => 'api', 'before' => 'auth|csfr'], function() {
+
+
+		Route::resource('users', 'UsersController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+		Route::resource('tickets', 'TicketsController', ['except' => ['index', 'create', 'store', 'show', 'edit', 'destroy']]);
 
 	});
 

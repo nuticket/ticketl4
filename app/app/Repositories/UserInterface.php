@@ -10,7 +10,5 @@ interface UserInterface {
 
 	public function destroy($id);
 
-	public function update($id, $data);
-
 	public function insert($data);
 }

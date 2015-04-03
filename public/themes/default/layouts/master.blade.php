@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>AdminLTE | Dashboard</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <meta name="_token" content="{{ csrf_token() }}" />
+        <meta name="api" content="{{ url('api') }}" />
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
@@ -25,7 +27,7 @@
         <link href="{{ theme('assets/css/select2-bootstrap.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ theme('assets/css/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ theme('assets/css/styles.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ theme('assets/css/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ theme('assets/css/bootstrap-editable.css') }}" rel="stylesheet" type="text/css" />
 
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -122,7 +124,7 @@
         <script src="{{ theme('assets/js/select2.min.js') }}" type="text/javascript"></script>
         <script src="{{ theme('assets/js/moment.js') }}" type="text/javascript"></script>
         <script src="{{ theme('assets/js/daterangepicker.js') }}" type="text/javascript"></script>
-        <script src="{{ theme('assets/js/bootstrap3-wysihtml5.all.min.js') }}" type="text/javascript"></script>
+        <script src="{{ theme('assets/js/bootstrap-editable.min.js') }}" type="text/javascript"></script>
         <script src="{{ theme('assets/js/app.js') }}" type="text/javascript"></script>
 
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -133,6 +135,125 @@
 
                 <script type="text/javascript">
             $(document).ready(function() {
+                api = $('meta[name="api"]').attr('content');
+                $(function() {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+                        }
+                    });
+                });
+                var priFull = [
+                    {id:1,text:'1 - Business is stopped'},
+                    {id:2,text:'2 - User is stopped'},
+                    {id:3,text:'3 - Business is hendered'},
+                    {id:4,text:'4 - User is hendered'},
+                    {id:5,text:'5 - Increase productivity/savings'}
+                ];
+                var priAbbr = [
+                    {id:1,text:'1'},
+                    {id:2,text:'2'},
+                    {id:3,text:'3'},
+                    {id:4,text:'4'},
+                    {id:5,text:'5'}
+                ];
+                //tab linking
+                var url = document.location.toString();
+                if (url.match('#')) {
+                    $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+                } 
+                $('.go-show-tab').click(function() {
+                    $('.nav-tabs a[href="' + $(this).attr('href') + '"]').tab('show')
+                })
+                
+                // $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+                // $('.editable-priority').editable({
+                //     send: 'always',
+                //     type: 'select',  
+                //     source: priorities,
+                //     params: function(params) {
+                //         //originally params contain pk, name and value
+                //         var data = {'priority': params.value};
+                //         // data.user_id = params.value;
+                //         return data;
+                //     },
+                // });
+                // $('.editable-users').editable({
+                //     send: 'always',
+                //     type: 'select2',
+                //     params: function(params) {
+                //         //originally params contain pk, name and value
+                //         var data = {'user_id': params.value};
+                //         // data.user_id = params.value;
+                //         return data;
+                //     },
+                //     select2: {
+                //         minimumInputLength: 2,
+                //         ajax: {
+                //             url: '../api/user?fields=id,display_name',
+                //             dataType: 'json',
+                //             data: function (term) {
+                //                 return {
+                //                     q: term // search term
+                //                 };
+                //             },
+                //             results: function(data) {
+                //                 var results = [];
+                //                   $.each(data, function(index, item){
+                //                     results.push({
+                //                       id: item.id,
+                //                       text: item.display_name
+                //                     });
+                //                   });
+                //                   return {
+                //                       results: results
+                //                   };
+                //             }
+                //         }
+                //     }
+                // });
+                $(".select2-users").select2({
+                    minimumInputLength: 2,
+                    cache: true,
+                    ajax: {
+                        url: api + '/users?fields=id,display_name',
+                        dataType: 'json',
+                        data: function (term) {
+                            return {
+                                q: term // search term
+                            };
+                        },
+                        results: function(data) {
+                            var results = [];
+                            $.each(data, function(index, item){
+                                results.push({
+                                    id: item.id,
+                                    text: item.display_name
+                                });
+                            });
+                            return {
+                                results: results
+                            };
+                        }
+                    },
+                    initSelection: function(element, callback) {
+                        var id = $(element).val();
+                        if (id !== "") {
+                            $.ajax(api + '/users/' + id + '?fields=id,display_name', {
+                                dataType: "json"
+                            }).done(function(r) {
+                                console.log(r);
+                                var data = {'id': id, 'text': r.display_name};
+                                callback(data); 
+                            });
+                        }
+                        
+                    }
+                });
+                $('.select2-priorities').select2({
+                    minimumResultsForSearch: 8,
+                    data: priFull
+                });
               $("select.select2-default").select2({minimumResultsForSearch: 8});
               $(".status-select").select2({
                     multiple: true,
@@ -146,13 +267,7 @@
               $(".priority-select").select2({
                     multiple: true,
                     separator: '-',
-                    data:[
-                        {id:1,text:'1'},
-                        {id:2,text:'2'},
-                        {id:3,text:'3'},
-                        {id:4,text:'4'},
-                        {id:5,text:'5'}
-                    ]
+                    data: priAbbr
               });
               $(".dept-select").select2({
                     multiple: true,
