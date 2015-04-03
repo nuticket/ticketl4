@@ -27,5 +27,9 @@ return [
 				'public' => true
 			]
 		]
+	], 
+	'Development' => [
+		'public' => false,
+		'url' => 'dev'
 	]
 ];

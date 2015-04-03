@@ -6,7 +6,8 @@ if ( ! function_exists('menu_icon'))
 		
 		$icons = [
 			'Tickets' => 'ticket',
-			'Reports' => 'book'
+			'Reports' => 'book',
+			'Development' => 'flask'
 		];
 
 		return $icons[$string];

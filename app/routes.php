@@ -30,6 +30,8 @@ Route::group(['namespace' => 'App\\Controllers'], function() {
 			Route::post('actions/{type?}', array('as' => 'actions.store', 'uses' => 'TicketActionsController@store'))->where('type', '(reply|comment|transfer|assign)');
 
 			Route::get('report/{report}', array('as' => 'report.index', 'uses' => 'ReportController@index'));
+
+			Route::resource('dev', 'DevController', ['only' => ['index']]); 
 		});
 
 	});
