@@ -36,7 +36,7 @@ class Menu {
 		})->filter(function($item){
 			if ($item->data('public')) { return true; }
 
-			if (!$item->data('public') && $this->app['auth']->user()->staff) {
+			if (!$item->data('public') && isset($this->app['auth']->user()->staff)) {
 				return true;
 			}
   			return false;
