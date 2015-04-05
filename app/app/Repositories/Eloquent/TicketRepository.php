@@ -144,9 +144,9 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 * @param  array $values
 	 * @return $this
 	 */
-	public function whereTicketDept(array $values) {
+	public function whereDept(array $values) {
 
-		return $this->where('ticket_dept_id', $values);
+		return $this->where('dept_id', $values);
 	} 
 
 	/**

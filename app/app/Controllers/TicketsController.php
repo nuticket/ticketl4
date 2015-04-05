@@ -40,7 +40,7 @@ class TicketsController extends BaseController {
 				->whereSearch(Request::has('q') ? explode('-', Str::slug(Request::get('q'))) : [])
 				->whereStatus(array_filter(explode('-', Request::get('status'))))
 				->wherePriority(array_filter(explode('-', Request::get('priority'))))
-				->whereTicketDept(array_filter(explode('-', Request::get('ticket_dept_id'))))
+				->whereDept(array_filter(explode('-', Request::get('dept_id'))))
 				->whereStaff(array_filter(explode('-', Request::get('staff_id'))))
 				->whereUser(Auth::user()->staff ? '*' : Auth::user()->id);
 

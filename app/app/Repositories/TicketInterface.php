@@ -14,7 +14,7 @@ interface TicketInterface {
 
 	public function whereStaff(array $values);
 
-	public function whereTicketDept(array $values);
+	public function whereDept(array $values);
 
 	public function whereUser($id = '*');
 

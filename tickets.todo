@@ -15,8 +15,8 @@
   [ ] Add Dept Summary report.
   [ ] Remember Me.
   [x] HLC/TT package. @done (15-03-10 12:13)
-  [ ] Remove breadcrumb placers for now.
-  [ ] ticket_dept_id errors on search in ticket list.
+  [x] Remove breadcrumb placers for now. @done (15-04-03 12:17)
+  [x] ticket_dept_id errors on search in ticket list. @done (15-04-04 21:15)
   [ ] Validation error when single day selected in daterange in reports.
   [ ] Add page meta to all pages.
   [x] Remove configs from app/config/adldap.php @done (15-03-05 19:33)
