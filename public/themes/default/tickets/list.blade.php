@@ -6,10 +6,10 @@
 		Tickets
 		<small>Control panel</small>
 	</h1>
-	<ol class="breadcrumb">
+	{{-- <ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="active">Dashboard</li>
-	</ol>
+	</ol> --}}
 </section>
 
 <!-- Main content -->
@@ -148,7 +148,7 @@
 								</div>
 								<div class="form-group">
 									<label for="exampleInputEmail1" class="control-label">Department</label>
-									<input class="dept-select form-control" name="ticket_dept_id" placeholder="Leave empty for any">
+									<input class="dept-select form-control" name="dept_id" placeholder="Leave empty for any">
 								</div>
 							</div>
 						</div>
