@@ -7,23 +7,24 @@ use \View;
 
 class SessionController extends BaseController {
 
-    public function getStart() {
-        return View::make('session.start');
+    public function create() {
+        return View::make('session.create');
     }
 
-    public function postStart() {
+    public function store() {
 
         try {
             Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')));
             return Redirect::intended('/');
         } catch (\InvalidArgumentException $e) {
-            return Redirect::to('session/start')
+            return Redirect::route('session.create')
                 ->with('message', 'Your username/password combination was incorrect')
                 ->withInput();
         }
     }
 
-    public function getEnd() {
+    // end session
+    public function index() {
         Auth::logout();
         return Redirect::to('session/start');
     }

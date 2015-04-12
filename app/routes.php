@@ -16,13 +16,14 @@ Route::group(['namespace' => 'App\\Controllers'], function() {
 	Route::group(['before' => 'ui|csfr'], function() {
 
 	
-		Route::get('session/start', array('as' => 'session.start', 'uses' => 'SessionController@getStart'));
-		Route::post('session/start', array('as' => 'session.post', 'uses' => 'SessionController@postStart'));
+		// Route::get('session/start', array('as' => 'session.start', 'uses' => 'SessionController@getStart'));
+		// Route::post('session/start', array('as' => 'session.post', 'uses' => 'SessionController@postStart'));
+		Route::resource('session', 'SessionController', ['only' => ['store', 'create', 'index']]);
 		
 
 		Route::group(array('before' => 'auth'), function() {
 
-			Route::get('session/end', array('as' => 'session.end', 'uses' => 'SessionController@getEnd'));
+			// Route::get('session/end', array('as' => 'session.end', 'uses' => 'SessionController@getEnd'));
 			Route::get('/', array('as' => 'dash.index', 'uses' => 'DashController@getIndex'));
 
 			Route::resource('tickets', 'TicketsController', ['except' => ['destroy']]); 

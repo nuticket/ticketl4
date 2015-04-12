@@ -70,7 +70,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="{{ route('session.end') }}">Logout</a></li>
+                                <li><a href="{{ route('session.index') }}">Logout</a></li>
                             </ul>
                         </li>
                     </ul>

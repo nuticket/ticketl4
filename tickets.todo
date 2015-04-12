@@ -19,7 +19,7 @@
   [x] Remove breadcrumb placers for now. @done (15-04-03 12:17)
   [x] ticket_dept_id errors on search in ticket list. @done (15-04-04 21:15)
   [x] Validation error when single day selected in daterange in reports. @done (15-04-04 21:51)
-  [ ] Add page meta to all pages.
+  [x] Add page meta to all pages. @done (15-04-11 23:50)
   [x] Remove configs from app/config/adldap.php @done (15-03-05 19:33)
   [x] Adjust ticket create to add 1 sec to reply/comment actions added @done (15-03-11 15:11)
   [x] Edit  @done (15-04-03 10:44)

@@ -22,7 +22,7 @@
 
         <div class="form-box" id="login-box">
             <div class="header">{{ trans('session.signin') }}</div>
-            <form action="{{ route('session.post') }}" method="post">
+            <form action="{{ route('session.store') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="body bg-gray">
                     @if (Session::get('message'))

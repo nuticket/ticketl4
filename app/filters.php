@@ -41,7 +41,7 @@ Route::filter('auth', function()
 		{
 			return Response::make('Unauthorized', 401);
 		}
-		return Redirect::guest('session/start');
+		return Redirect::guest('session/create');
 	}
 });
 
