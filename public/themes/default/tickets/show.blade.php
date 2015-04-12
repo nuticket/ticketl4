@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Show Ticket #' . $ticket['id'])
+
 @section('content')
 <section class="content-header">
 	<h1>

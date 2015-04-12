@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Report - ' . $title)
+
 @section('content')
 <section class="content-header">
 	<h1>

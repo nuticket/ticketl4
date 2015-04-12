@@ -10,6 +10,7 @@
   [x] Refactor reply action with ticket create. @done (15-02-28 11:16)
   [x] Refactor comment action with ticket create. @done (15-02-28 11:16)
   [x] Test add actions on show page. @done (15-02-23 20:55)
+  [x] Add config command to edit/add configs on the fly. @done (15-04-11 23:34)
   [x] Create staff performance report. @done (15-03-03 15:46)
   [x] Add icon abiltiy to default theme sidebar menu. @done (15-03-03 16:26)
   [ ] Add Dept Summary report.

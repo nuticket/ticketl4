@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Create Ticket')
+
 @section('content')
 <section class="content-header">
 	<h1>
