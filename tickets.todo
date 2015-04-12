@@ -17,7 +17,7 @@
   [x] HLC/TT package. @done (15-03-10 12:13)
   [x] Remove breadcrumb placers for now. @done (15-04-03 12:17)
   [x] ticket_dept_id errors on search in ticket list. @done (15-04-04 21:15)
-  [ ] Validation error when single day selected in daterange in reports.
+  [x] Validation error when single day selected in daterange in reports. @done (15-04-04 21:51)
   [ ] Add page meta to all pages.
   [x] Remove configs from app/config/adldap.php @done (15-03-05 19:33)
   [x] Adjust ticket create to add 1 sec to reply/comment actions added @done (15-03-11 15:11)

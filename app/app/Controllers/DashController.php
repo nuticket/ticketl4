@@ -16,10 +16,10 @@ class DashController extends BaseController {
 		$memory = App::make('orchestra.memory')->make();
 		$memory->set('site.allow_pw_reset', false);
 		$memory->forget('site.client_registration');
-		$memory->set('site.user_registration', false);
+		$memory->put('site.user_registration', false);
 		$memory->set('site.date_time_format', 'm/d/Y g:i a');
 		// dd(\Auth::user());
-		return View::make('tickets.dash');
+		// return View::make('tickets.dash');
 	}
 
 	/**
