@@ -14,7 +14,7 @@ class SessionController extends BaseController {
     public function store() {
 
         try {
-            Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')));
+            Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')), Input::get('remember'));
             return Redirect::intended('/');
         } catch (\InvalidArgumentException $e) {
             return Redirect::route('session.create')
@@ -26,7 +26,7 @@ class SessionController extends BaseController {
     // end session
     public function index() {
         Auth::logout();
-        return Redirect::to('session/start');
+        return Redirect::route('session.create');
     }
 
 }

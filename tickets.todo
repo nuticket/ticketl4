@@ -14,7 +14,7 @@
   [x] Create staff performance report. @done (15-03-03 15:46)
   [x] Add icon abiltiy to default theme sidebar menu. @done (15-03-03 16:26)
   [ ] Add Dept Summary report.
-  [ ] Remember Me.
+  [x] Remember Me. @done (15-04-12 11:04)
   [x] HLC/TT package. @done (15-03-10 12:13)
   [x] Remove breadcrumb placers for now. @done (15-04-03 12:17)
   [x] ticket_dept_id errors on search in ticket list. @done (15-04-04 21:15)
@@ -23,6 +23,7 @@
   [x] Remove configs from app/config/adldap.php @done (15-03-05 19:33)
   [x] Adjust ticket create to add 1 sec to reply/comment actions added @done (15-03-11 15:11)
   [x] Edit  @done (15-04-03 10:44)
+  [x] Refactor session route/controller to a resource controller. @done (15-04-12 11:03)
 
 1.x.x:
   [ ] Refactor can_reply validation rule to use repository and add to rules(ticket,ticket_action)

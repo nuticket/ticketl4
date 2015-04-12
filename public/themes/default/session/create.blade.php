@@ -39,7 +39,7 @@
                         <input type="password" name="password" class="form-control" placeholder="{{ trans('session.password') }}"/>
                     </div>        
                     <div class="form-group">
-                        <input type="checkbox" name="remember_me"/> {{ trans('session.remember_me') }}
+                        <input type="checkbox" name="remember"/> {{ trans('session.remember_me') }}
                     </div>
                 </div>
                 <div class="footer">                                                               
