@@ -47,3 +47,5 @@
   [ ] Add select2 to dropdowns in action boxes on ticket create.
   [ ] Add status (setting) to comment action on ticket create.
   [ ] Fontfamily is different from select2 and and other form elements.
+  [ ] Merge/duplicate ticket functionality.
+  [ ] Knowledgebase.

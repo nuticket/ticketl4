@@ -85,6 +85,12 @@
   - name: set permissions on composer
     file: path=/usr/local/bin/composer mode=755
 
+  - name: download rocketeer and place in bin
+    command: wget -O /usr/local/bin/rocketeer http://rocketeer.autopergamene.eu/versions/rocketeer.phar
+
+  - name: set permissions on rocketeer
+    file: path=/usr/local/bin/rocketeer mode=755
+
   - name: Change mysql root password
     mysql_user: name=root password={{ mysql_root_password | default("root") }} login_user=root login_password=''
 
