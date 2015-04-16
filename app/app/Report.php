@@ -1,11 +1,7 @@
 <?php namespace App;
 
-use DB;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Report {
-
-	public function __construct(DB $db) {
-		$this->db = $db;
-	}
+class Report extends Eloquent {
 
 }

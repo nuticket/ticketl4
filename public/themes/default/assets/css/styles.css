@@ -54,5 +54,10 @@ box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
 	padding-top: 20px;
 }
 
-/*reports*/
+/*old reports*/
 .form-inline .input-group>.form-control.daterange {width:170px;}
+
+/*reports*/
+section.reports .fa-stack-2x {
+	font-size: 1.9em;
+} 

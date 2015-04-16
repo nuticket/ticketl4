@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Reports')
+@section('title', 'Report - ' . $report['name'])
 
 @section('content')
 <section class="content-header">
 	<h1>
-		Reports
-		{{-- <small>Report</small> --}}
+		{{ $report['name'] }}
+		<small>Report</small>
 	</h1>
 	{{-- <ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -15,7 +15,7 @@
 
 </section>
 
-<section class="content reports">
+<section class="content">
 
 	<div class="mailbox row">
 		<div class="col-xs-12">
@@ -35,27 +35,27 @@
 							</div> --}}<!-- /.row -->
 
 							<div class="box-body table-responsive">
-								<table id="example2" class="table table-hover">
+								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<td>Name</td>
-											<td>Description</td>
-											<td></td>
+											@foreach($results[0] as $title => $val)
+												@if (strpos($title, 'hide_') !== 0)
+												<td>{{ $title }}</td>
+												@endif
+											@endforeach
 										</tr>
 									</thead>
 									
 									<tbody>
-										@foreach($reports as $row)
+									@foreach($results as $row)
 										<tr>
-											<td>{{ $row['name'] }}</td>
-											<td>{{ $row['desc'] }}</td>
-											<td class="action">
-												<a href="{{ route('reports.show', [$row['id']]) }}" data-toggle="tooltip" data-placement="top" title="Run">
-													<i class="fa fa-chevron-circle-right fa-lg"></i>
-												</a>
-											</td>
-										</tr>
+										@foreach ($row as $key => $val)
+											@if (strpos($key, 'hide_') !== 0)
+											<td>{{ $val }}</td>
+											@endif
 										@endforeach
+										</tr>
+									@endforeach
 									</tbody>
 									<tfoot>
 			

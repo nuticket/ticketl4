@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Reports')
+@section('title', 'Report - ' . $title)
 
 @section('content')
 <section class="content-header">
 	<h1>
-		Reports
-		{{-- <small>Report</small> --}}
+		{{ $title }}
+		<small>Report</small>
 	</h1>
 	{{-- <ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -15,15 +15,22 @@
 
 </section>
 
-<section class="content reports">
+<section class="content">
 
+	@if ($errors->any())
+	<div class="alert alert-danger alert-dismissable">
+		<i class="fa fa-ban"></i>
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		<b>Error!</b> {{ $errors->first() }}
+	</div>
+	@endif
 	<div class="mailbox row">
 		<div class="col-xs-12">
 			<div class="box box-solid">
 				<div class="box-body">
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
-							{{-- <div class="row pad">
+							<div class="row pad">
 								<div class="col-sm-6">
 
 								</div>
@@ -32,30 +39,26 @@
 									@include('reports.variables.header.' . $var['type'], $var)
 								@endforeach
 								</div>
-							</div> --}}<!-- /.row -->
+							</div><!-- /.row -->
 
 							<div class="box-body table-responsive">
-								<table id="example2" class="table table-hover">
+								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<td>Name</td>
-											<td>Description</td>
-											<td></td>
+											@foreach($results[0] as $title => $val)
+												<td>{{ $title }}</td>
+											@endforeach
 										</tr>
 									</thead>
 									
 									<tbody>
-										@foreach($reports as $row)
+									@foreach($results as $row)
 										<tr>
-											<td>{{ $row['name'] }}</td>
-											<td>{{ $row['desc'] }}</td>
-											<td class="action">
-												<a href="{{ route('reports.show', [$row['id']]) }}" data-toggle="tooltip" data-placement="top" title="Run">
-													<i class="fa fa-chevron-circle-right fa-lg"></i>
-												</a>
-											</td>
-										</tr>
+										@foreach ($row as $val)
+											<td>{{ $val }}</td>
 										@endforeach
+										</tr>
+									@endforeach
 									</tbody>
 									<tfoot>
 			

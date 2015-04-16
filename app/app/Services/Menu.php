@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use Lavary\Menu\Builder;
+use Auth;
 
 class Menu {
 
@@ -36,7 +37,10 @@ class Menu {
 		})->filter(function($item){
 			if ($item->data('public')) { return true; }
 
-			if (!$item->data('public') && isset($this->app['auth']->user()->staff)) {
+			if (!Auth::check()) { return false; }
+			
+			$staff = $this->app['auth']->user()->staff;
+			if (!$item->data('public') && !empty($staff)) {
 				return true;
 			}
   			return false;
