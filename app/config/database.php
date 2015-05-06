@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => isset($_ENV['DB_HOST']) ?: 'localhost',
-			'database'  => isset($_ENV['DB_DATABASE']) ?: 'nuticket',
-			'username'  => isset($_ENV['DB_USERNAME']) ?: 'nuticket',
-			'password'  => isset($_ENV['DB_PASSWORD']) ?: 'nuticket',
+			'host'      => isset($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : 'localhost',
+			'database'  => isset($_ENV['DB_DATABASE']) ? $_ENV['DB_DATABASE'] : 'nuticket',
+			'username'  => isset($_ENV['DB_USERNAME']) ? $_ENV['DB_USERNAME'] : 'nuticket',
+			'password'  => isset($_ENV['DB_PASSWORD']) ? $_ENV['DB_PASSWORD'] : 'nuticket',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
