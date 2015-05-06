@@ -4,13 +4,13 @@
     apt: update_cache=yes
 
   - name: Create the App directory
-    file: state=directory path=/opt/tickets/current/public
+    file: state=directory path=/opt/nuticket/current/public
 
   - name: Add nodejs repo
-    apt_repository: repo='ppa:chris-lea/node.js'
+    apt_repository: repo='ppa:chris-lea/node.js' validate_certs=no
 
   - name: Add nginx repo
-    apt_repository: repo='ppa:nginx/stable'
+    apt_repository: repo='ppa:nginx/stable' validate_certs=no
 
   - name: Install common packages
     apt: name={{ item }} state=present update_cache=yes
@@ -33,7 +33,6 @@
     npm: name={{ item }} state=present global=yes
     with_items:
       - bower
-      - gulp
       - browser-sync
 
   - name: Fix infamous node vs nodejs issue
@@ -70,32 +69,23 @@
     notify: restart php5-fpm
 
   - name: Copy ost nginx configuration
-    template: src=files/nginx.conf dest=/etc/nginx/sites-available/tickets
+    template: src=/opt/tickets/current/develop/files/nginx.conf dest=/etc/nginx/sites-available/tickets
     notify: restart nginx
 
   - name: create nginx sites-availale link
     file: src=/etc/nginx/sites-available/tickets dest=/etc/nginx/sites-enabled/tickets state=link
 
   - name: copy queue listener config to supervisor
-    template: src=files/queue.conf dest=/etc/supervisor/conf.d/queue.conf
+    template: src=/opt/tickets/current/develop/files/queue.conf dest=/etc/supervisor/conf.d/queue.conf
 
   - name: download composer and place in bin
-    command: wget -O /usr/local/bin/composer https://getcomposer.org/composer.phar
-
-  - name: set permissions on composer
-    file: path=/usr/local/bin/composer mode=755
-
-  - name: download rocketeer and place in bin
-    command: wget -O /usr/local/bin/rocketeer http://rocketeer.autopergamene.eu/versions/rocketeer.phar
-
-  - name: set permissions on rocketeer
-    file: path=/usr/local/bin/rocketeer mode=755
+    get_url: url=https://getcomposer.org/composer.phar dest=/usr/local/bin/composer mode=755 validate_certs=no
 
   - name: Change mysql root password
     mysql_user: name=root password={{ mysql_root_password | default("root") }} login_user=root login_password=''
 
   - name: Create working db
-    mysql_db: name=tickets login_user=root login_password={{ mysql_root_password | default("root") }} state=present
+    mysql_db: name=nuticket login_user=root login_password={{ mysql_root_password | default("root") }} state=present
 
   - name: create mysql admin user and add to database
-    mysql_user: name=tickets password={{ mysql_ibs_password | default("tickets") }} login_user=root login_password={{ mysql_root_password | default("root") }} priv=tickets.*:ALL state=present
+    mysql_user: name=nuticket password={{ mysql_nut_password | default("nuticket") }} login_user=root login_password={{ mysql_root_password | default("root") }} priv=nuticket.*:ALL state=present
