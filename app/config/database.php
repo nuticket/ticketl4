@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => isset($_ENV['DB_HOST']) ?: 'localhost',
-			'database'  => isset($_ENV['DB_DATABASE']) ?: 'tickets',
-			'username'  => isset($_ENV['DB_USERNAME']) ?: 'tickets',
-			'password'  => isset($_ENV['DB_PASSWORD']) ?: 'tickets',
+			'database'  => isset($_ENV['DB_DATABASE']) ?: 'nuticket',
+			'username'  => isset($_ENV['DB_USERNAME']) ?: 'nuticket',
+			'password'  => isset($_ENV['DB_PASSWORD']) ?: 'nuticket',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
