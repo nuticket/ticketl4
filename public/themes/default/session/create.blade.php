@@ -7,7 +7,7 @@
         <!-- bootstrap 3.0.2 -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- font Awesome -->
-        <link href="{{ theme('assets/css/vendor.css') }}" rel="stylesheet" type="text/css" />
+        {{-- <link href="{{ theme('assets/css/vendor.css') }}" rel="stylesheet" type="text/css" /> --}}
         <!-- Theme style -->
         <link href="{{ theme('assets/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
 
@@ -59,7 +59,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->
         <!-- // <script src="{{ theme('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>         -->
-        <script src="{{ theme('assets/js/vendor.js') }}" type="text/javascript"></script>        
+        {{-- // <script src="{{ theme('assets/js/vendor.js') }}" type="text/javascript"></script>         --}}
         <script src="{{ theme('assets/js/app.js') }}" type="text/javascript"></script>        
 
     </body>

@@ -27,7 +27,7 @@
         <link href="{{ theme('assets/css/select2-bootstrap.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ theme('assets/css/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ theme('assets/css/styles.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ theme('assets/css/bootstrap-editable.css') }}" rel="stylesheet" type="text/css" />
+        {{-- <link href="{{ theme('assets/css/bootstrap-editable.css') }}" rel="stylesheet" type="text/css" /> --}}
 
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -124,14 +124,14 @@
         <script src="{{ theme('assets/js/select2.min.js') }}" type="text/javascript"></script>
         <script src="{{ theme('assets/js/moment.js') }}" type="text/javascript"></script>
         <script src="{{ theme('assets/js/daterangepicker.js') }}" type="text/javascript"></script>
-        <script src="{{ theme('assets/js/bootstrap-editable.min.js') }}" type="text/javascript"></script>
+        {{-- // <script src="{{ theme('assets/js/bootstrap-editable.min.js') }}" type="text/javascript"></script> --}}
         <script src="{{ theme('assets/js/app.js') }}" type="text/javascript"></script>
 
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="js/AdminLTE/dashboard.js" type="text/javascript"></script>
+        {{-- // <script src="js/AdminLTE/dashboard.js" type="text/javascript"></script> --}}
 
         <!-- AdminLTE for demo purposes -->
-        <script src="js/AdminLTE/demo.js" type="text/javascript"></script>
+        {{-- // <script src="js/AdminLTE/demo.js" type="text/javascript"></script> --}}
 
                 <script type="text/javascript">
             $(document).ready(function() {
