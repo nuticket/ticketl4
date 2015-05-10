@@ -15,7 +15,7 @@ class CreateConfigTable extends Migration {
 		Schema::create('config', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 64)->unique('name_unique');
+			$table->string('name', 64)->unique('`orchestra_options_name_unique`');
 			$table->text('value');
 		});
 	}
