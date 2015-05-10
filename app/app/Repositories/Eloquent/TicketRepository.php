@@ -75,6 +75,7 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 * @return \Illuminate\Pagination\Paginator
 	 */
 	public function paginate($per_page) {
+		// die($this->select()->model->toSql());
 
 		return $this->select()->model->paginate($per_page);
 	}
@@ -99,10 +100,32 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 * @return $this
 	 */
 	public function whereSearch(array $query = [], array $cols = []) {
+		
+		$this->model = $this->model->orWhereIn('tickets.id', function($q) use ($query) {
+		    $q = $q->select('ta.ticket_id')
+			    ->from($this->action->getTable() . ' as ta')
+			    ->join('tickets as t', 'ta.ticket_id', '=', 't.id')
+				->join('users as u', 't.user_id', '=', 'u.id')
+				->join('staff as s', 's.id', '=', 't.staff_id')
+				->join('users as su','su.id', '=', 's.user_id');
 
-		$search = ['tickets.id', 'subject', 'description', 'users.display_name', 'users.username', 'su.display_name'];
+			foreach ($query as $term) {
 
-		return parent::whereSearch($query, $search);
+				$q = $q->where(function($qu) use ($term) {
+
+					$qu->orWhere('ta.title', 'LIKE', '%' . $term . '%')
+						->orWhere('ta.body', 'LIKE', '%' . $term . '%')
+						->orWhere('u.display_name', 'LIKE', '%' . $term . '%')
+						->orWhere('u.username', 'LIKE', '%' . $term . '%');
+
+				});
+
+			}
+
+
+		});
+
+		return $this;
 	}
 
 	/**
