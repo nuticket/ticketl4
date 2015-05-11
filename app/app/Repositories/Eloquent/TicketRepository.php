@@ -101,7 +101,7 @@ class TicketRepository extends BaseRepository implements TicketInterface {
 	 */
 	public function whereSearch(array $query = [], array $cols = []) {
 		
-		$this->model = $this->model->orWhereIn('tickets.id', function($q) use ($query) {
+		$this->model = $this->model->WhereIn('tickets.id', function($q) use ($query) {
 		    $q = $q->select('ta.ticket_id')
 			    ->from($this->action->getTable() . ' as ta')
 			    ->join('tickets as t', 'ta.ticket_id', '=', 't.id')

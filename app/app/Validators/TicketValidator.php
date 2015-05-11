@@ -10,8 +10,8 @@ class TicketValidator extends ContextualValidator
     	'default' => [
             'user_id' => ['required', 'exists:users,id'],
             'priority' => ['required', 'between:1,5'],
-            'title' => ['required', 'min:3'],
-            'body' => ['required', 'min:3'],
+            'title' => ['required', 'min:10'],
+            'body' => ['required', 'min:10'],
     	],
         'create' => [
             'time_spent' => ['numeric'],
