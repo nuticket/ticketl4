@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.provider :virtualbox do |virtualbox|
-       virtualbox.customize ["modifyvm", :id, "--name", "nuticket"]
+       virtualbox.customize ["modifyvm", :id, "--name", "nuticketl4"]
     end
 
 end
