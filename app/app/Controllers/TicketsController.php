@@ -78,21 +78,21 @@ class TicketsController extends BaseController {
 
 		$attrs = $validator->getAttributes();
 
-		$ticket = $this->tickets->create($attrs);
+		$ticket = $this->tickets->create(array_except($attrs, ['time_spent']));
 		$attrs['ticket_id'] = $ticket['id'];
 		$attrs['status'] = $ticket['status'];
 
 		if ($attrs['reply_body'] != '') { 
 			$attrs['body'] = $attrs['reply_body'];
 			$attrs['type'] = in_array($attrs['status'], ['closed', 'resolved']) ? $attrs['status'] : 'reply';
-			$this->action->create($attrs);
+			$this->action->createAndUpdateTicket($attrs);
 			unset($attrs['time_spent']);
 		}
 
 		if ($attrs['comment_body'] != '') { 
 			$attrs['body'] = $attrs['comment_body'];
 			$attrs['type'] = 'comment';
-			$this->action->create($attrs);
+			$this->action->createAndUpdateTicket($attrs);
 		}
 
 		return Redirect::route('tickets.show', [$ticket['id']])

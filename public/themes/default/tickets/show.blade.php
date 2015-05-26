@@ -307,7 +307,7 @@
 									<dt>Total Hours</dt>
 									<dd>{{ $ticket['time_spent'] }}</dd>
 									<dt>Last Action</dt>
-									<dd>{{ datetime($ticket['last_action_at']) }}</dd>
+									<dd>{{ !is_null($ticket['last_action_at']) ? datetime($ticket['last_action_at']) : 'Never' }}</dd>
 								</dl>
 							</div>
 						</div>

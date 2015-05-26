@@ -55,7 +55,12 @@ if ( ! function_exists('datetime'))
 {
 	function datetime($time) {
 		
-		return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $time)->format(config('site.date_time_format'));
+		try {
+			return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $time)->format(config('site.date_time_format', 'm/d/Y g:i a'));
+		} catch (InvalidArgumentException $e) {
+			return;
+		}
+
 		
 	}
 }
